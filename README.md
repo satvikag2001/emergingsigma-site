@@ -65,6 +65,9 @@ Hosted on GitHub Pages from the `main` branch. Pushing to `main` publishes.
 ## Editing notes
 
 - The nav and footer are duplicated across every page — update them everywhere.
-- Hero and section background images are hotlinked from Unsplash (see `style.css`).
+- Hero and section backgrounds are served from `assets/img/`; the site has no
+  third-party image dependency. Sources and licensing are in
+  [`assets/img/CREDITS.md`](assets/img/CREDITS.md), which also flags
+  `hero-product-quality.jpg` as a stand-in awaiting a proper image.
 - To add a resource to `resources.html`, copy the commented `TEMPLATE` block near
   the bottom of the table and drop the PDF into `docs/`.
