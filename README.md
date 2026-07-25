@@ -1,6 +1,6 @@
 # emergingsigma.com
 
-Marketing website for **Emerging Sigma Consulting** — quality, regulatory and lean
+Marketing website for **Emerging Sigma Consulting**: quality, regulatory and lean
 digital consulting for medical device companies.
 
 Static HTML/CSS/JS. No build step, no dependencies.
@@ -64,7 +64,7 @@ Hosted on GitHub Pages from the `main` branch. Pushing to `main` publishes.
 
 ## Editing notes
 
-- The nav and footer are duplicated across every page — update them everywhere.
+- The nav and footer are duplicated across every page, so update them everywhere.
 - Hero and section backgrounds are served from `assets/img/`; the site has no
   third-party image dependency. Sources and licensing are in
   [`assets/img/CREDITS.md`](assets/img/CREDITS.md), which also flags

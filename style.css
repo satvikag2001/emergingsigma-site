@@ -26,7 +26,7 @@ img{max-width:100%;height:auto;display:block}
   --shadow2:0 4px 24px rgba(13,82,70,0.13);
   --r:6px;
   --r2:12px;
-  /* Motion. A decelerating curve — quick to start, settling softly. */
+  /* Motion. A decelerating curve, quick to start, settling softly. */
   --rv-ease:cubic-bezier(.22,1,.36,1);
   --rv-dur:.8s;
 }
@@ -238,7 +238,7 @@ p{color:var(--gray5);line-height:1.8;font-size:15px}
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 
 /* Scroll reveal. The hidden state is scoped to .js-motion, which main.js sets
-   on <html> before first paint — so if the script never runs, every element
+   on <html> before first paint, so if the script never runs, every element
    stays visible instead of being stranded at opacity:0.
    .fade-up is the older authored hook; main.js promotes it to .reveal so both
    share one timing curve. */
@@ -355,7 +355,7 @@ p{color:var(--gray5);line-height:1.8;font-size:15px}
   .cmp-cell:first-child{border-right:none;border-bottom:1px solid var(--border)}
 }
 
-/* ═══════════ EQ PAGE — ENERGETIC REFRESH ═══════════ */
+/* ═══════════ EQ PAGE: ENERGETIC REFRESH ═══════════ */
 
 /* HERO with image */
 .eq-hero{position:relative;min-height:600px;display:flex;align-items:center;overflow:hidden}
@@ -385,14 +385,14 @@ p{color:var(--gray5);line-height:1.8;font-size:15px}
 .img-split-body .divider{background:#a8e063;margin:12px 0 20px}
 .img-split-body p{color:rgba(255,255,255,.78);font-size:14.5px}
 
-/* CHALLENGE — energetic */
+/* CHALLENGE: energetic */
 .chal-card{background:#fff;border:1px solid var(--border);border-left:4px solid #e14434;border-radius:0 var(--r2) var(--r2) 0;padding:26px 28px;transition:all .28s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden}
 .chal-card::after{content:'';position:absolute;top:0;right:0;width:110px;height:110px;background:radial-gradient(circle at top right,rgba(225,68,52,.09),transparent 70%);pointer-events:none}
 .chal-card:hover{box-shadow:0 10px 34px rgba(225,68,52,.16);transform:translateX(5px);border-left-width:6px}
 .chal-no{width:34px;height:34px;background:linear-gradient(135deg,#e14434,#b32d1f);color:#fff;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex-shrink:0;box-shadow:0 3px 9px rgba(225,68,52,.32)}
 .chal-cost{margin-top:13px;padding:8px 13px;background:rgba(225,68,52,.07);border-radius:var(--r);font-size:12.5px;color:#c0392b;font-weight:700;display:inline-flex;align-items:center;gap:7px}
 
-/* PURPOSE — richer */
+/* PURPOSE: richer */
 .purpose-col{border-radius:var(--r2);padding:36px;color:#fff;position:relative;overflow:hidden;transition:transform .3s}
 .purpose-col:hover{transform:translateY(-4px)}
 .purpose-col.reg{background:linear-gradient(150deg,#0d5246,#083d36 70%)}
@@ -401,7 +401,7 @@ p{color:var(--gray5);line-height:1.8;font-size:15px}
 .purpose-ico{width:52px;height:52px;background:rgba(255,255,255,.16);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:18px;position:relative;z-index:1}
 .purpose-col h3,.purpose-col .p-sub,.purpose-col ul{position:relative;z-index:1}
 
-/* LIFECYCLE — energetic */
+/* LIFECYCLE: energetic */
 .life-box{background:#fff;border:1px solid var(--border);padding:28px 18px;text-align:center;transition:all .3s;position:relative}
 .life-box::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--green),#a8e063);transform:scaleX(0);transition:transform .3s;transform-origin:left}
 .life-box:hover::before{transform:scaleX(1)}
@@ -410,7 +410,7 @@ p{color:var(--gray5);line-height:1.8;font-size:15px}
 .life-box:hover .life-ico{transform:scale(1.12) rotate(-5deg)}
 .life-doc{margin-top:14px;padding:6px 12px;background:linear-gradient(135deg,rgba(109,179,63,.14),rgba(109,179,63,.05));border:1px solid rgba(109,179,63,.3);border-radius:100px;font-size:11px;font-weight:700;color:var(--green2);letter-spacing:.08em;display:inline-block}
 
-/* CHAIN — energetic */
+/* CHAIN: energetic */
 .chain-item{display:grid;grid-template-columns:118px 1fr;gap:26px;padding:30px 0;border-bottom:1px solid var(--border);align-items:start;transition:all .25s}
 .chain-item:hover{background:linear-gradient(90deg,rgba(109,179,63,.045),transparent 55%);padding-left:14px;border-radius:var(--r2)}
 .chain-badge{background:linear-gradient(145deg,var(--teal3),var(--teal2));color:#fff;border-radius:var(--r2);padding:20px 12px;text-align:center;box-shadow:0 5px 16px rgba(13,82,70,.24);transition:transform .28s}
@@ -421,7 +421,7 @@ p{color:var(--gray5);line-height:1.8;font-size:15px}
 .chain-tag{background:linear-gradient(135deg,var(--gray2),#e4ebe8);color:var(--teal);padding:5px 12px;border-radius:100px;font-size:11.5px;font-weight:600;transition:all .2s}
 .chain-tag:hover{background:linear-gradient(135deg,rgba(109,179,63,.2),rgba(109,179,63,.1));color:var(--green2)}
 
-/* COMPARE — energetic */
+/* COMPARE: energetic */
 .cmp{background:#fff;border:1px solid var(--border);border-radius:var(--r2);overflow:hidden;box-shadow:var(--shadow)}
 .cmp-head{background:linear-gradient(90deg,rgba(225,68,52,.07),rgba(109,179,63,.09))}
 .cmp-row:not(.cmp-head):hover{background:rgba(109,179,63,.035)}
@@ -444,7 +444,7 @@ p{color:var(--gray5);line-height:1.8;font-size:15px}
 .impact-card h4{color:#a8e063;font-size:15px;margin-bottom:8px}
 .impact-card p{color:rgba(255,255,255,.74);font-size:13px;margin:0;line-height:1.6}
 
-/* DELIVERABLE — energetic */
+/* DELIVERABLE: energetic */
 .del-item{display:flex;gap:17px;align-items:flex-start;background:#fff;border:1px solid var(--border);border-radius:var(--r2);padding:22px 24px;transition:all .28s;position:relative;overflow:hidden}
 .del-item::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--green),#a8e063);transform:scaleY(0);transition:transform .28s;transform-origin:top}
 .del-item:hover::before{transform:scaleY(1)}
@@ -452,7 +452,7 @@ p{color:var(--gray5);line-height:1.8;font-size:15px}
 .del-ico{width:52px;height:52px;background:linear-gradient(145deg,var(--teal3),var(--teal2));color:#fff;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex-shrink:0;font-family:'Merriweather',serif;box-shadow:0 4px 12px rgba(13,82,70,.24);transition:transform .28s}
 .del-item:hover .del-ico{transform:rotate(-6deg) scale(1.07)}
 
-/* ENGAGEMENT — energetic */
+/* ENGAGEMENT: energetic */
 .eng-card{border:1px solid var(--border);border-radius:var(--r2);overflow:hidden;background:#fff;transition:all .3s}
 .eng-card:hover{box-shadow:0 12px 36px rgba(13,82,70,.16);transform:translateY(-6px)}
 .eng-top{background:linear-gradient(140deg,var(--teal3),var(--teal2));padding:24px;position:relative;overflow:hidden}
@@ -461,7 +461,7 @@ p{color:var(--gray5);line-height:1.8;font-size:15px}
 .eng-top h4,.eng-top .e-sub{position:relative;z-index:1}
 .eng-num{position:absolute;bottom:-14px;right:14px;font-family:'Merriweather',serif;font-size:56px;font-weight:700;color:rgba(255,255,255,.11);line-height:1;z-index:0}
 
-/* STANDARDS — energetic */
+/* STANDARDS: energetic */
 .std-item{display:flex;align-items:center;gap:11px;padding:13px 16px;background:#fff;border:1px solid var(--border);border-radius:var(--r);font-size:13px;font-weight:600;color:var(--gray6);transition:all .22s}
 .std-item:hover{border-color:var(--green);background:rgba(109,179,63,.045);transform:translateX(4px)}
 .std-dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,var(--green),#a8e063);flex-shrink:0;box-shadow:0 0 0 3px rgba(109,179,63,.16)}
@@ -486,7 +486,7 @@ p{color:var(--gray5);line-height:1.8;font-size:15px}
 }
 @media(max-width:560px){.impact-grid{grid-template-columns:1fr}}
 
-/* ═══ EQ HERO — benefit strip with icons ═══ */
+/* ═══ EQ HERO: benefit strip with icons ═══ */
 .eq-hero h1 .hl{color:#8ede3a;display:inline}
 .eq-hero .lead strong{color:#a8e063;font-weight:700}
 
@@ -796,7 +796,7 @@ p{color:var(--gray5);line-height:1.8;font-size:15px}
   .pyr-1,.pyr-2,.pyr-3,.pyr-4{max-width:100%}
 }
 
-/* ═══ TRAINING PAGE — MODULE CATALOGUE ═══ */
+/* ═══ TRAINING PAGE: MODULE CATALOGUE ═══ */
 .lvl-tabs{display:flex;gap:8px;margin-bottom:30px;flex-wrap:wrap}
 .lvl-btn{padding:14px 24px;border-radius:var(--r2);font-size:13px;font-weight:700;cursor:pointer;border:2px solid var(--border);background:#fff;color:var(--gray5);transition:all .24s;font-family:'Open Sans',sans-serif;text-align:left;flex:1;min-width:180px}
 .lvl-btn small{display:block;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green2);margin-bottom:4px}
@@ -974,7 +974,7 @@ p{color:var(--gray5);line-height:1.8;font-size:15px}
 }
 @media(max-width:560px){.lc{grid-template-columns:1fr}}
 
-/* ═══ HOME — CORE PRACTICE BLOCK ═══ */
+/* ═══ HOME: CORE PRACTICE BLOCK ═══ */
 .core-block{background:linear-gradient(140deg,#083d36,#0d5246 45%,#2e7d3a);border-radius:var(--r2);overflow:hidden;position:relative;box-shadow:0 12px 40px rgba(13,82,70,.2);margin-bottom:22px}
 .core-block::before{content:'';position:absolute;top:-90px;right:-70px;width:320px;height:320px;border-radius:50%;background:rgba(168,224,99,.1)}
 .core-head{padding:36px 40px 28px;position:relative;z-index:1;border-bottom:1px solid rgba(255,255,255,.14)}
@@ -1065,7 +1065,7 @@ p{color:var(--gray5);line-height:1.8;font-size:15px}
   .nav-toggle{display:flex}
   body.nav-locked{overflow:hidden}
 
-  /* Override the earlier `.nav-menu{display:none}` — the menu is now toggleable. */
+  /* Override the earlier `.nav-menu{display:none}`. The menu is now toggleable. */
   .nav-menu{
     display:none;position:fixed;top:70px;left:0;right:0;bottom:0;
     flex-direction:column;align-items:stretch;gap:0;
@@ -1101,7 +1101,7 @@ p{color:var(--gray5);line-height:1.8;font-size:15px}
 .form-submit:disabled{opacity:.65;cursor:not-allowed}
 .float-form form,.form-card form{display:block}
 
-/* Visually hidden — used for the spam honeypot and screen-reader labels. */
+/* Visually hidden, used for the spam honeypot and screen-reader labels. */
 .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
 /* ═══ SUPPORTING PAGES (privacy, thank-you, 404) ═══ */
@@ -1160,7 +1160,7 @@ p{color:var(--gray5);line-height:1.8;font-size:15px}
 
 /* ── Parallax ───────────────────────────────────
    Only .hero-bg opts in. The other hero backgrounds run the slowZoom
-   keyframes, which own their transform — driving it from JS as well would
+   keyframes, which own their transform. Driving it from JS as well would
    fight the animation. */
 /* Extra height above and below gives the drift somewhere to go, so the image
    never exposes an edge as it moves. */

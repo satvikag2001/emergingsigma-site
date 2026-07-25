@@ -1,4 +1,4 @@
-/* Emerging Sigma Consulting — shared site script */
+/* Emerging Sigma Consulting: shared site script */
 (function () {
   "use strict";
 
@@ -24,7 +24,7 @@
       document.body.classList.toggle("nav-locked", open);
     });
 
-    /* On touch screens the dropdown can't rely on :hover — tap to expand. */
+    /* On touch screens the dropdown can't rely on :hover, so tap to expand. */
     menu.querySelectorAll(".nav-item > .nav-link:not([href])").forEach(function (link) {
       link.setAttribute("role", "button");
       link.setAttribute("tabindex", "0");
@@ -165,7 +165,7 @@
     });
 
     /* Last resort. If anything visible is still hidden once the page has
-       settled, show it — motion must never cost someone content. */
+       settled, show it. Motion must never cost someone content. */
     window.addEventListener("load", function () {
       setTimeout(function () {
         var vh = window.innerHeight || 0;
@@ -313,7 +313,7 @@
               form.reset();
               setStatus(
                 form,
-                "Thank you — your message has been sent. We will respond within one business day.",
+                "Thank you. Your message has been sent. We will respond within one business day.",
                 "ok"
               );
             } else {
