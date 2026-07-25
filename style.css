@@ -2,7 +2,11 @@
 html{scroll-behavior:smooth;font-size:16px}
 body{font-family:'Open Sans',sans-serif;background:#fff;color:#333;line-height:1.6}
 a{color:inherit;text-decoration:none}
-img{max-width:100%;display:block}
+/* height:auto keeps images to their aspect ratio. Images carry width/height
+   attributes to reserve layout space, and those apply as presentational
+   hints unless author CSS overrides them. Rules that size a logo by height
+   (.nav-logo img, .footer-logo img) are more specific and still win. */
+img{max-width:100%;height:auto;display:block}
 
 :root{
   --teal:#0d5246;
