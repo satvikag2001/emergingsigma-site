@@ -137,29 +137,48 @@
         // Cap the cascade so a long row never feels slow to finish.
         var delay = Math.min(i * 0.07, 0.35);
         if (delay) el.style.setProperty("--rv-delay", delay + "s");
-        obs.observe(el);
         all.push(el);
       });
     });
 
-    /* Safety net. Nothing here should ever leave content unreadable, so
-       sweep anything already within the viewport and reveal it directly.
-       Covers observer callbacks that arrive late or not at all, and means
-       above-the-fold content is never waiting on a scroll that may never
-       come (short pages, deep links, restored scroll positions). */
-    function sweep() {
-      var h = window.innerHeight || 0;
-      all.forEach(function (el) {
-        if (el.classList.contains("in")) return;
-        var r = el.getBoundingClientRect();
-        if (r.top < h && r.bottom > 0) {
+    /* Split by what is already on screen. Anything below the fold waits for
+       the observer; anything visible now plays a cascade on load, so the page
+       arrives rather than appearing fully formed. */
+    var h = window.innerHeight || 0;
+    var onscreen = [];
+    all.forEach(function (el) {
+      var r = el.getBoundingClientRect();
+      if (r.top < h && r.bottom > 0) onscreen.push(el);
+      else obs.observe(el);
+    });
+
+    /* Two frames: the first lets the hidden state paint, the second starts
+       the transition. Setting both in one frame gets coalesced and the
+       element would snap in with no animation at all. */
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        onscreen.forEach(function (el, i) {
+          el.style.setProperty("--rv-delay", Math.min(0.05 + i * 0.08, 0.5) + "s");
           el.classList.add("in");
-          obs.unobserve(el);
-        }
+        });
       });
-    }
-    requestAnimationFrame(sweep);
-    window.addEventListener("load", sweep);
+    });
+
+    /* Last resort. If anything visible is still hidden once the page has
+       settled, show it — motion must never cost someone content. */
+    window.addEventListener("load", function () {
+      setTimeout(function () {
+        var vh = window.innerHeight || 0;
+        all.forEach(function (el) {
+          if (el.classList.contains("in")) return;
+          var r = el.getBoundingClientRect();
+          if (r.top < vh && r.bottom > 0) {
+            el.classList.add("in");
+            obs.unobserve(el);
+          }
+        });
+      }, 1200);
+    });
   }
 
   /* ── Hero entrance ──────────────────────────────────── */

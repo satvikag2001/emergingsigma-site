@@ -28,7 +28,7 @@ img{max-width:100%;height:auto;display:block}
   --r2:12px;
   /* Motion. A decelerating curve — quick to start, settling softly. */
   --rv-ease:cubic-bezier(.22,1,.36,1);
-  --rv-dur:.7s;
+  --rv-dur:.8s;
 }
 
 /* TYPOGRAPHY */
@@ -243,7 +243,7 @@ p{color:var(--gray5);line-height:1.8;font-size:15px}
    .fade-up is the older authored hook; main.js promotes it to .reveal so both
    share one timing curve. */
 .js-motion .reveal{
-  opacity:0;transform:translateY(22px);
+  opacity:0;transform:translateY(32px);
   transition:opacity var(--rv-dur) var(--rv-ease) var(--rv-delay,0s),
              transform var(--rv-dur) var(--rv-ease) var(--rv-delay,0s);
 }
@@ -1152,7 +1152,7 @@ p{color:var(--gray5);line-height:1.8;font-size:15px}
    The hero is above the fold, so it plays on load rather than on scroll. */
 .js-motion .hero-content>*,
 .js-motion .eq-hero-inner>*{
-  opacity:0;transform:translateY(24px);
+  opacity:0;transform:translateY(30px);
   animation:heroIn .85s var(--rv-ease) forwards;
   animation-delay:calc(.1s + var(--i,0)*.09s);
 }
