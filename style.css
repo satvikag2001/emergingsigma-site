@@ -126,7 +126,7 @@ p{color:var(--gray5);line-height:1.8;font-size:15px}
 
 /* FLOATING CONTACT */
 .float-contact{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:400;display:flex;flex-direction:column;align-items:flex-end}
-.float-tab{background:var(--teal);color:#fff;writing-mode:vertical-rl;text-orientation:mixed;transform:rotate(180deg);padding:18px 10px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;border-radius:0 0 var(--r) var(--r);box-shadow:var(--shadow2)}
+.float-tab{background:var(--teal);color:#fff;border:none;font-family:'Open Sans',sans-serif;writing-mode:vertical-rl;text-orientation:mixed;transform:rotate(180deg);padding:18px 10px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;border-radius:0 0 var(--r) var(--r);box-shadow:var(--shadow2)}
 .float-tab:hover{background:var(--teal2)}
 .float-form{position:fixed;right:-320px;top:50%;transform:translateY(-50%);width:300px;background:#fff;border:1px solid var(--border);border-radius:var(--r2) 0 0 var(--r2);box-shadow:var(--shadow2);padding:24px;transition:right .3s ease;z-index:399}
 .float-form.open{right:0}
@@ -1035,3 +1035,69 @@ p{color:var(--gray5);line-height:1.8;font-size:15px}
   .wm::after{display:block;right:auto;left:50%;top:auto;bottom:0;transform:translateX(-50%);width:26px;height:1px}
   .wm:last-child::after{display:none}
 }
+
+/* ═══ MOBILE NAVIGATION ═══ */
+.nav-toggle{display:none;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;padding:10px;background:none;border:none;cursor:pointer;border-radius:var(--r);flex-shrink:0}
+.nav-toggle:hover{background:var(--gray2)}
+.nav-toggle span{display:block;width:24px;height:2px;background:var(--teal3);border-radius:2px;transition:transform .25s ease,opacity .2s ease}
+.nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-toggle.open span:nth-child(2){opacity:0}
+.nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+@media(max-width:900px){
+  .nav-toggle{display:flex}
+  body.nav-locked{overflow:hidden}
+
+  /* Override the earlier `.nav-menu{display:none}` — the menu is now toggleable. */
+  .nav-menu{
+    display:none;position:fixed;top:70px;left:0;right:0;bottom:0;
+    flex-direction:column;align-items:stretch;gap:0;
+    background:#fff;border-top:1px solid var(--border);
+    padding:10px 18px 40px;overflow-y:auto;z-index:499;
+    -webkit-overflow-scrolling:touch;
+  }
+  .nav-menu.open{display:flex}
+  .nav-item{width:100%;border-bottom:1px solid var(--gray2)}
+  .nav-item:last-child{border-bottom:none}
+  .nav-link{padding:15px 4px;font-size:15px;border-radius:0;justify-content:space-between;width:100%}
+  .caret{font-size:12px;transition:transform .2s ease}
+  .nav-item.dd-open .caret{transform:rotate(180deg)}
+
+  /* Dropdown becomes an inline accordion instead of a hover flyout. */
+  .nav-dd{
+    position:static;min-width:0;border:none;box-shadow:none;border-radius:0;
+    padding:0 0 10px;opacity:1;pointer-events:auto;transform:none;transition:none;
+    display:none;background:var(--gray1);border-radius:var(--r);margin-bottom:10px;
+  }
+  .nav-item.dd-open .nav-dd{display:block}
+  .nav-item:hover .nav-dd{opacity:1;transform:none}
+  .nav-item:not(.dd-open):hover .nav-dd{display:none}
+  .nav-dd a{padding:12px 18px;font-size:14px}
+  .nav-dd a:hover{padding-left:22px}
+  .nav-cta{margin-left:0;margin-top:14px;justify-content:center;border-radius:var(--r)!important}
+}
+
+/* ═══ FORM STATUS MESSAGES ═══ */
+.form-status{margin-top:14px;padding:0;font-size:13.5px;line-height:1.6;border-radius:var(--r);text-align:center}
+.form-status.ok{padding:12px 14px;background:#eaf6e3;color:#3d6b21;border:1px solid #c5e3b0}
+.form-status.err{padding:12px 14px;background:#fdecea;color:#a5342a;border:1px solid #f3c4bf}
+.form-submit:disabled{opacity:.65;cursor:not-allowed}
+.float-form form,.form-card form{display:block}
+
+/* Visually hidden — used for the spam honeypot and screen-reader labels. */
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* ═══ SUPPORTING PAGES (privacy, thank-you, 404) ═══ */
+.btn-ghost{background:transparent;color:var(--teal);border-color:var(--gray3)}
+.btn-ghost:hover{border-color:var(--teal);background:var(--gray1)}
+
+.doc-list{list-style:none;margin:0 0 14px}
+.doc-list li{position:relative;padding-left:26px;margin-bottom:10px;color:var(--gray5);font-size:15px;line-height:1.75}
+.doc-list li::before{content:'';position:absolute;left:2px;top:.62em;width:7px;height:7px;border-radius:50%;background:var(--green)}
+.doc-list li strong{color:var(--gray6)}
+.doc-list a{color:var(--teal);text-decoration:underline}
+
+.doc-body{max-width:860px}
+.doc-body h2{font-size:22px;margin-bottom:10px}
+.doc-body p{margin-bottom:22px}
+.doc-body .divider{margin-bottom:16px}
