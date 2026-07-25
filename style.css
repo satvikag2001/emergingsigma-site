@@ -1109,3 +1109,10 @@ p{color:var(--gray5);line-height:1.8;font-size:15px}
 .tr-hero-bg,.dg-hero-bg,.sq-hero-bg,.wh-hero-bg,.pq-hero-bg{
   background-color:var(--teal3);
 }
+
+/* ═══ PRINCIPAL CONSULTANT CARD ═══ */
+.profile-card{background:var(--teal3);border-radius:var(--r2);padding:22px 20px;margin-top:16px;text-align:center}
+.profile-name{font-family:'Merriweather',serif;color:#fff;font-weight:700;font-size:19px;line-height:1.25;margin-bottom:8px}
+.profile-role{color:#fff;font-weight:600;font-size:14px;letter-spacing:.02em}
+.profile-org{color:rgba(255,255,255,.65);font-size:12.5px;margin-top:3px}
+.profile-loc{color:var(--green);font-size:12px;margin-top:9px;padding-top:9px;border-top:1px solid rgba(255,255,255,.14)}
