@@ -71,40 +71,152 @@
     });
   }
 
-  /* ── Scroll reveal + stat counters (unchanged behaviour) ─ */
-  function initAnimations() {
-    var reduce =
-      window.matchMedia &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var reduce =
+    window.matchMedia &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var supported = "IntersectionObserver" in window;
 
-    var els = document.querySelectorAll(".fade-up");
-    if (reduce || !("IntersectionObserver" in window)) {
-      els.forEach(function (el) {
-        el.classList.add("visible");
+  /* ── Scroll reveal ──────────────────────────────────────
+     Targets are derived at runtime rather than hand-tagged, so every page
+     behaves the same without touching 17 files. Each section contributes its
+     top-level blocks; any block that is a grid or flex row is replaced by its
+     own children so rows cascade instead of appearing as one slab. */
+  function revealTargets() {
+    var sections = document.querySelectorAll(
+      "section, .cta-band, .clients-strip, .stats-band, .doc-body"
+    );
+    var out = [];
+
+    sections.forEach(function (sec) {
+      if (sec.closest(".hero, .eq-hero")) return; // hero animates on load
+      var scope = sec.querySelector(":scope > .wrap") || sec;
+      var blocks = Array.prototype.slice.call(scope.children);
+
+      blocks.forEach(function (el) {
+        if (!el.getBoundingClientRect) return;
+        var cs = getComputedStyle(el);
+        if (cs.display === "none") return;
+
+        // Expand one level: a multi-child grid/flex row staggers its children.
+        var kids = Array.prototype.slice.call(el.children);
+        if (
+          (cs.display === "grid" || cs.display === "flex") &&
+          kids.length >= 2 &&
+          kids.length <= 24
+        ) {
+          out.push(kids);
+        } else {
+          out.push([el]);
+        }
       });
-    } else {
-      var obs = new IntersectionObserver(
-        function (entries) {
-          entries.forEach(function (e) {
-            if (e.isIntersecting) {
-              e.target.classList.add("visible");
-              obs.unobserve(e.target);
-            }
-          });
-        },
-        { threshold: 0.1 }
-      );
-      els.forEach(function (el) {
+    });
+    return out;
+  }
+
+  function initReveal() {
+    if (reduce || !supported) return; // CSS keeps everything visible
+
+    var groups = revealTargets();
+    var obs = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          e.target.classList.add("in");
+          obs.unobserve(e.target);
+        });
+      },
+      // Fire a little before the element reaches the bottom edge, so the
+      // motion reads as anticipation rather than catching up.
+      { threshold: 0.08, rootMargin: "0px 0px -8% 0px" }
+    );
+
+    var all = [];
+    groups.forEach(function (group) {
+      group.forEach(function (el, i) {
+        el.classList.add("reveal");
+        // Cap the cascade so a long row never feels slow to finish.
+        var delay = Math.min(i * 0.07, 0.35);
+        if (delay) el.style.setProperty("--rv-delay", delay + "s");
         obs.observe(el);
+        all.push(el);
+      });
+    });
+
+    /* Safety net. Nothing here should ever leave content unreadable, so
+       sweep anything already within the viewport and reveal it directly.
+       Covers observer callbacks that arrive late or not at all, and means
+       above-the-fold content is never waiting on a scroll that may never
+       come (short pages, deep links, restored scroll positions). */
+    function sweep() {
+      var h = window.innerHeight || 0;
+      all.forEach(function (el) {
+        if (el.classList.contains("in")) return;
+        var r = el.getBoundingClientRect();
+        if (r.top < h && r.bottom > 0) {
+          el.classList.add("in");
+          obs.unobserve(el);
+        }
       });
     }
+    requestAnimationFrame(sweep);
+    window.addEventListener("load", sweep);
+  }
 
+  /* ── Hero entrance ──────────────────────────────────── */
+  function initHero() {
+    document
+      .querySelectorAll(".hero-content, .eq-hero-inner")
+      .forEach(function (hero) {
+        Array.prototype.slice.call(hero.children).forEach(function (el, i) {
+          el.style.setProperty("--i", i);
+        });
+      });
+  }
+
+  /* ── Condensing header + hero parallax ──────────────── */
+  function initScrollEffects() {
+    var nav = document.querySelector(".site-nav");
+    var heroBg = document.querySelector(".hero-bg");
+    var parallax = heroBg && !reduce;
+    var ticking = false;
+
+    function onScroll() {
+      var y = window.pageYOffset;
+
+      if (nav) nav.classList.toggle("condensed", y > 40);
+
+      if (parallax && window.innerWidth > 900) {
+        var h = heroBg.parentElement.offsetHeight || 520;
+        if (y < h) {
+          // Drift is bounded by the slack built into .hero-bg's inset, so the
+          // image can never pull away from the edges of the hero.
+          heroBg.style.transform =
+            "translate3d(0," + (y * 0.12).toFixed(1) + "px,0)";
+        }
+      }
+      ticking = false;
+    }
+
+    window.addEventListener(
+      "scroll",
+      function () {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(onScroll);
+      },
+      { passive: true }
+    );
+    onScroll();
+  }
+
+  /* ── Stat counters ──────────────────────────────────── */
+  function initAnimations() {
     var stats = document.querySelectorAll(".stat-num[data-target]");
     function paint(el, val) {
       var sf = el.dataset.suffix || "";
       el.innerHTML = Math.floor(val) + "<span>" + sf + "</span>";
     }
-    if (reduce || !("IntersectionObserver" in window)) {
+    if (reduce || !supported) {
       stats.forEach(function (el) {
         paint(el, +el.dataset.target);
       });
@@ -121,7 +233,8 @@
           requestAnimationFrame(function step(ts) {
             if (start === null) start = ts;
             var p = Math.min((ts - start) / 1800, 1);
-            paint(el, target * p);
+            // Ease out, so the count decelerates into its final value.
+            paint(el, target * (1 - Math.pow(1 - p, 3)));
             if (p < 1) requestAnimationFrame(step);
           });
         });
@@ -213,6 +326,9 @@
   function init() {
     initMobileNav();
     initActiveLink();
+    initHero();
+    initReveal();
+    initScrollEffects();
     initAnimations();
     initForms();
   }
