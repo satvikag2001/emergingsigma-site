@@ -81,6 +81,10 @@ p{color:var(--gray5);line-height:1.8;font-size:15px}
 .caret{font-size:9px;opacity:.6;margin-top:1px}
 .nav-dd{position:absolute;top:calc(100% + 6px);left:0;min-width:230px;background:#fff;border:1px solid var(--border);border-radius:var(--r2);box-shadow:var(--shadow2);padding:8px 0;opacity:0;pointer-events:none;transform:translateY(-8px);transition:all .18s;z-index:600}
 .nav-item:hover .nav-dd{opacity:1;pointer-events:all;transform:translateY(0)}
+/* The panel floats 6px below the trigger. Without a bridge across that gap
+   the pointer leaves the item on the way down and the menu closes, which
+   made it feel as though it had to be clicked. */
+.nav-item:has(.nav-dd)::after{content:'';position:absolute;top:100%;left:0;right:0;height:10px}
 .nav-dd a{display:block;padding:9px 20px;font-size:13.5px;font-weight:500;color:var(--gray6);transition:all .12s}
 .nav-dd a:hover{background:var(--gray2);color:var(--teal);padding-left:26px}
 .nav-cta{background:var(--teal)!important;color:#fff!important;margin-left:8px}
@@ -607,21 +611,21 @@ p{color:var(--gray5);line-height:1.8;font-size:15px}
 .qms-hero-bg{position:absolute;inset:0;background-image:url('assets/img/hero-qms.jpg');background-size:cover;background-position:center;transform:scale(1.05);animation:slowZoom 22s ease-in-out infinite alternate}
 
 /* SYNDROME callout */
-.synd-wrap{background:linear-gradient(150deg,#2a1512,#3d1a14 60%,#4a1f16);border-radius:var(--r2);padding:52px 48px;position:relative;overflow:hidden;box-shadow:0 14px 44px rgba(80,20,12,.22)}
-.synd-wrap::before{content:'';position:absolute;top:-80px;right:-60px;width:300px;height:300px;border-radius:50%;background:rgba(225,68,52,.09)}
-.synd-wrap::after{content:'';position:absolute;bottom:-100px;left:-60px;width:260px;height:260px;border-radius:50%;background:rgba(225,68,52,.06)}
+.synd-wrap{background:linear-gradient(150deg,#1b2b31,#22383f 58%,#2b454e);border-radius:var(--r2);padding:52px 48px;position:relative;overflow:hidden;box-shadow:0 14px 44px rgba(16,40,48,.26)}
+.synd-wrap::before{content:'';position:absolute;top:-80px;right:-60px;width:300px;height:300px;border-radius:50%;background:rgba(240,167,66,.10)}
+.synd-wrap::after{content:'';position:absolute;bottom:-100px;left:-60px;width:260px;height:260px;border-radius:50%;background:rgba(240,167,66,.07)}
 .synd-in{position:relative;z-index:1}
-.synd-tag{display:inline-flex;align-items:center;gap:9px;background:rgba(225,68,52,.2);border:1px solid rgba(255,120,105,.45);color:#ff9b8d;padding:7px 18px;border-radius:100px;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin-bottom:20px}
+.synd-tag{display:inline-flex;align-items:center;gap:9px;background:rgba(240,167,66,.17);border:1px solid rgba(255,196,107,.45);color:#ffc46b;padding:7px 18px;border-radius:100px;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin-bottom:20px}
 .synd-wrap h2{color:#fff;margin-bottom:14px;font-size:clamp(26px,3.2vw,40px)}
 .synd-wrap .synd-lead{color:rgba(255,255,255,.8);font-size:16px;line-height:1.8;max-width:720px;margin-bottom:34px}
-.synd-wrap .synd-lead em{color:#ffb3a6;font-style:italic}
+.synd-wrap .synd-lead em{color:#ffd08a;font-style:italic}
 
 .synd-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .synd-item{display:flex;gap:14px;align-items:flex-start;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:var(--r);padding:16px 18px;transition:all .24s}
-.synd-item:hover{background:rgba(225,68,52,.13);border-color:rgba(255,120,105,.4);transform:translateX(4px)}
-.synd-x{width:22px;height:22px;border-radius:50%;background:rgba(225,68,52,.28);color:#ff9b8d;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;margin-top:1px}
+.synd-item:hover{background:rgba(240,167,66,.13);border-color:rgba(255,196,107,.42);transform:translateX(4px)}
+.synd-x{width:22px;height:22px;border-radius:50%;background:rgba(240,167,66,.26);color:#ffc46b;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;margin-top:1px}
 .synd-item p{color:rgba(255,255,255,.82);font-size:13.5px;margin:0;line-height:1.6}
-.synd-foot{margin-top:32px;padding:20px 24px;background:rgba(0,0,0,.22);border-left:3px solid #ff6b55;border-radius:0 var(--r) var(--r) 0}
+.synd-foot{margin-top:32px;padding:20px 24px;background:rgba(0,0,0,.22);border-left:3px solid #f0a742;border-radius:0 var(--r) var(--r) 0}
 .synd-foot p{color:rgba(255,255,255,.9);font-size:15px;margin:0;line-height:1.75;font-weight:600}
 
 /* LIVING QMS contrast */
