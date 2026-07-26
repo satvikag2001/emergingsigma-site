@@ -162,8 +162,6 @@ sed -i '' 's/style\.css?v=[0-9]*/style.css?v=3/g; s/main\.js?v=[0-9]*/main.js?v=
 
 ## Known gaps at launch
 
-- `assets/manish-airan.jpg` is 400x393 and soft on retina screens. It also has a
-  navigation arrow from a screenshot baked into the left edge.
 - `assets/img/hero-product-quality.jpg` is a stand-in copied from
   `equipment-split.jpg`. See `assets/img/CREDITS.md`.
 - The 12 download buttons on `resources.html` link to `#`. Left as-is by
