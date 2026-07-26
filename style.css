@@ -1227,3 +1227,32 @@ p{color:var(--gray5);line-height:1.8;font-size:15px}
   .eq-hero .lead{max-width:930px}
   .hero-pills{margin-top:26px}
 }
+
+/* ═══ SERVICES MENU: GROUPED DROPDOWN ═══
+   Four topics, with Quality Management holding its five areas as an indented
+   group rather than a second flyout, so everything is reachable on one hover. */
+.nav-dd{min-width:288px}
+.nav-dd-group{margin:6px 0;padding:8px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--gray1)}
+.nav-dd-label{display:block;padding:2px 20px 7px;font-size:10.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--gray4)}
+.nav-dd-group a{padding-left:32px;font-size:13px;position:relative}
+.nav-dd-group a::before{content:'';position:absolute;left:20px;top:50%;width:4px;height:4px;margin-top:-2px;border-radius:50%;background:var(--gray3);transition:background .12s}
+.nav-dd-group a:hover{padding-left:36px}
+.nav-dd-group a:hover::before{background:var(--green)}
+
+/* Quality Management card on the services page. Needs .hub-body in the
+   selector to outrank .hub-body ul li, which is display:flex and would
+   otherwise put the name and its description side by side. */
+.hub-body ul.hub-subs{display:block;gap:0;margin-bottom:4px}
+.hub-body ul.hub-subs li{display:block;position:relative;padding:10px 0 10px 18px;border-bottom:1px solid var(--border);font-size:inherit}
+.hub-body ul.hub-subs li:last-child{border-bottom:none}
+.hub-body ul.hub-subs li::before{content:'▸';position:absolute;left:0;top:10px;color:var(--green);font-weight:700}
+.hub-subs a{display:block;font-size:14px;font-weight:700;color:var(--teal);transition:color .15s}
+.hub-subs a:hover{color:var(--green2)}
+.hub-subs span{display:block;font-size:12.5px;color:var(--gray4);line-height:1.55;margin-top:3px}
+
+@media(max-width:900px){
+  .nav-dd-group{background:transparent;border-color:var(--gray2);margin:4px 0}
+  .nav-dd-label{padding:6px 18px 4px}
+  .nav-dd-group a{padding-left:34px}
+  .nav-dd-group a::before{left:20px}
+}

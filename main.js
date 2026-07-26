@@ -24,20 +24,29 @@
       document.body.classList.toggle("nav-locked", open);
     });
 
-    /* On touch screens the dropdown can't rely on :hover, so tap to expand. */
-    menu.querySelectorAll(".nav-item > .nav-link:not([href])").forEach(function (link) {
-      link.setAttribute("role", "button");
-      link.setAttribute("tabindex", "0");
-      link.setAttribute("aria-expanded", "false");
+    /* "Our Services" is a real link to the services page. On desktop the panel
+       opens on hover. On touch screens there is no hover, so tapping the caret
+       expands the group while tapping the label still follows the link. */
+    menu.querySelectorAll(".nav-item").forEach(function (item) {
+      var link = item.querySelector(":scope > .nav-link");
+      var caret = item.querySelector(":scope > .nav-link .caret");
+      if (!link || !item.querySelector(".nav-dd")) return;
+      caret.setAttribute("role", "button");
+      caret.setAttribute("tabindex", "0");
+      caret.setAttribute("aria-label", "Show services");
+      caret.setAttribute("aria-expanded", "false");
       function toggleDd(e) {
         if (window.innerWidth > 900) return;
         e.preventDefault();
-        var item = link.parentElement;
+        e.stopPropagation();
         var open = item.classList.toggle("dd-open");
-        link.setAttribute("aria-expanded", open ? "true" : "false");
+        caret.setAttribute("aria-expanded", open ? "true" : "false");
       }
-      link.addEventListener("click", toggleDd);
-      link.addEventListener("keydown", function (e) {
+      link.addEventListener("click", function (e) {
+        if (window.innerWidth > 900) return;
+        if (e.target === caret || caret.contains(e.target)) toggleDd(e);
+      });
+      caret.addEventListener("keydown", function (e) {
         if (e.key === "Enter" || e.key === " ") toggleDd(e);
       });
     });
