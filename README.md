@@ -62,6 +62,20 @@ to `thank-you.html`.
 Hosted on GitHub Pages from the `main` branch. Pushing to `main` publishes.
 `CNAME` binds the site to `emergingsigma.com`; DNS is managed at Hostinger.
 
+Full steps, including the DNS records and the Web3Forms key, are in
+[DEPLOY.md](DEPLOY.md).
+
+## History
+
+`main` starts from the site as originally supplied. To see everything that
+changed since:
+
+```bash
+git diff original main          # 48 files
+git switch original             # browse the original site
+git switch main                 # back to current
+```
+
 ## Editing notes
 
 - The nav and footer are duplicated across every page, so update them everywhere.
