@@ -166,3 +166,4 @@ sed -i '' 's/style\.css?v=[0-9]*/style.css?v=3/g; s/main\.js?v=[0-9]*/main.js?v=
   `equipment-split.jpg`. See `assets/img/CREDITS.md`.
 - The 12 download buttons on `resources.html` link to `#`. Left as-is by
   decision; wire them to files in `docs/` when the PDFs exist.
+- `check.html` is a local diagnostic. Delete it before going live.
