@@ -40,9 +40,11 @@ h4{font-size:17px}
 p{color:var(--gray5);line-height:1.8;font-size:15px}
 
 /* LAYOUT */
-/* Container width for the whole site. Raise or lower this one value to change
-   how much of a wide screen the content occupies. */
-.wrap{max-width:1320px;margin:0 auto;padding:0 28px}
+/* Container for the whole site. The cap sets the widest the content ever gets;
+   the clamped padding keeps the side gutters proportional, so a large monitor
+   gives more to the content instead of to empty margins. Phones override the
+   padding in the max-width:900px block below. */
+.wrap{max-width:1600px;margin:0 auto;padding:0 clamp(24px,3.5vw,56px)}
 .sec{padding:76px 0}
 .sec-sm{padding:48px 0}
 .sec-bg{background:var(--gray1);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
