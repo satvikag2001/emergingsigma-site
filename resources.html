@@ -110,7 +110,13 @@
       <button class="res-filter" onclick="filterRes('general',this)">General / Other <span class="cnt" id="c-general">1</span></button>
     </div>
     <div>
-      <div class="add-note">
+      <!-- Editor note, hidden from visitors. Was rendering on the live page.
+           HOW TO ADD A NEW RESOURCE
+           Copy the TEMPLATE row near the bottom of this file. Set data-cat to
+           one of: cdsco | eu | fda | iso | general. Update the date, title and
+           href to the uploaded file path. Filter and search pick it up
+           automatically; the category counts are computed on load. -->
+      <div class="add-note" hidden>
         <h4>📌 How to Add a New Resource</h4>
         <p>Copy the template row at the bottom of this file. Set <code>data-cat</code> to: <code>cdsco</code> · <code>eu</code> · <code>fda</code> · <code>iso</code> · <code>general</code>. Update the date, title, and <code>href</code> to your uploaded file path. Filter and search work automatically.</p>
       </div>
