@@ -156,21 +156,5 @@
   </div>
 </footer>
 <script src="main.js?v=2"></script>
-<script>
-var currentCat='all';
-function filterRes(cat,btn){currentCat=cat;document.querySelectorAll('.res-filter').forEach(function(b){b.classList.remove('active')});btn.classList.add('active');applyFilters();}
-function applyFilters(){
-  var q=document.getElementById('searchInput').value.toLowerCase();
-  var rows=document.querySelectorAll('#res-list .res-row');
-  var v=0;
-  rows.forEach(function(r){
-    var cm=currentCat==='all'||r.dataset.cat===currentCat;
-    var tm=!q||r.dataset.title.toLowerCase().includes(q)||r.textContent.toLowerCase().includes(q);
-    var show=cm&&tm;r.style.display=show?'':'none';if(show)v++;
-  });
-  document.getElementById('visCount').textContent='Showing '+v+' resource'+(v!==1?'s':'');
-  document.getElementById('noRes').style.display=v===0?'block':'none';
-}
-</script>
 </body>
 </html>
