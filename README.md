@@ -44,7 +44,7 @@ python3 -m http.server 8000
 
 Both the contact form and the floating "Quick Enquiry" panel post to
 [Web3Forms](https://web3forms.com), which emails submissions to
-`manish@emergingsigma.com`.
+`support@emergingsigma.com`.
 
 The access key lives in a hidden `access_key` input on each form. To rotate it:
 

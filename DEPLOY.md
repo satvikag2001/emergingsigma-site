@@ -12,7 +12,7 @@ Do step 1 before going live. Steps 2 to 4 are the deploy itself.
 Both forms currently carry the placeholder `__WEB3FORMS_ACCESS_KEY__` and will
 not deliver anything until it is replaced.
 
-1. Go to <https://web3forms.com>, enter `manish@emergingsigma.com`, and submit.
+1. Go to <https://web3forms.com>, enter `support@emergingsigma.com`, and submit.
    The access key arrives by email. No account or password is involved.
 2. Replace the placeholder everywhere:
 

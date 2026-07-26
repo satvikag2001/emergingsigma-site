@@ -293,7 +293,7 @@
         if (!keyField || keyField.value === PLACEHOLDER || !keyField.value) {
           setStatus(
             form,
-            "This form is not connected yet. Please email manish@emergingsigma.com directly.",
+            "This form is not connected yet. Please email support@emergingsigma.com directly.",
             "err"
           );
           return;
@@ -328,7 +328,7 @@
             } else {
               setStatus(
                 form,
-                "Sorry, something went wrong. Please email manish@emergingsigma.com or call +91 7769036573.",
+                "Sorry, something went wrong. Please email support@emergingsigma.com or call +91 9082657529.",
                 "err"
               );
             }
@@ -336,7 +336,7 @@
           .catch(function () {
             setStatus(
               form,
-              "Network error. Please email manish@emergingsigma.com or call +91 7769036573.",
+              "Network error. Please email support@emergingsigma.com or call +91 9082657529.",
               "err"
             );
           })
