@@ -1,0 +1,149 @@
+# Builds and publishes emergingsigma.com to GitHub Pages.
+#
+# The repo never stores real keys. Each is committed as a placeholder and swapped
+# in here from a GitHub Actions secret, so nothing sensitive lands in git history.
+#
+# Set these under Settings > Secrets and variables > Actions:
+#   CF_BEACON_TOKEN        Cloudflare Web Analytics site token   (analytics)
+#   WEB3FORMS_ACCESS_KEY   Web3Forms access key                  (contact forms)
+#
+# Either may be left unset: the build warns and ships that feature switched off
+# rather than failing, so a missing secret can never take the site down.
+#
+# Note both values are still readable in the delivered page by any visitor. That
+# is unavoidable for a static site - the browser has to send them. Keeping them
+# out of the repo is the goal here, not keeping them from visitors.
+
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Let a running deploy finish rather than cancelling it half-published.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Everything published lives in _site. Assembling it explicitly keeps the
+      # repo's own paperwork off the public web, which branch-based Pages did not.
+      - name: Assemble the published site
+        run: |
+          mkdir _site
+          rsync -a \
+            --exclude '.git' \
+            --exclude '.github' \
+            --exclude '_site' \
+            --exclude 'README.md' \
+            --exclude 'DEPLOY.md' \
+            ./ _site/
+          test -f _site/CNAME || {
+            echo "::error::CNAME is missing - the custom domain would break."; exit 1; }
+
+      # python3 rather than sed: the replacement is literal, so a key containing
+      # a delimiter or an & can never corrupt the output.
+      - name: Inject Cloudflare Web Analytics token
+        env:
+          CF_BEACON_TOKEN: ${{ secrets.CF_BEACON_TOKEN }}
+        run: |
+          if [ -z "$CF_BEACON_TOKEN" ]; then
+            echo "::warning::CF_BEACON_TOKEN not set - deploying with analytics off."
+            exit 0
+          fi
+          python3 - <<'EOF'
+          import os, pathlib
+          p = pathlib.Path("_site/main.js")
+          s = p.read_text()
+          if "__CF_BEACON_TOKEN__" not in s:
+              raise SystemExit("::error::Placeholder __CF_BEACON_TOKEN__ not found in main.js")
+          p.write_text(s.replace("__CF_BEACON_TOKEN__", os.environ["CF_BEACON_TOKEN"]))
+          print("Cloudflare Web Analytics token injected.")
+          EOF
+
+      - name: Inject Web3Forms access key
+        env:
+          WEB3FORMS_ACCESS_KEY: ${{ secrets.WEB3FORMS_ACCESS_KEY }}
+        run: |
+          if [ -z "$WEB3FORMS_ACCESS_KEY" ]; then
+            echo "::warning::WEB3FORMS_ACCESS_KEY not set - contact forms stay disabled."
+            exit 0
+          fi
+          python3 - <<'EOF'
+          import os, pathlib
+          key = os.environ["WEB3FORMS_ACCESS_KEY"]
+          hit = 0
+          for p in pathlib.Path("_site").glob("*.html"):
+              s = p.read_text()
+              if "__WEB3FORMS_ACCESS_KEY__" in s:
+                  p.write_text(s.replace("__WEB3FORMS_ACCESS_KEY__", key))
+                  hit += 1
+          if not hit:
+              raise SystemExit("::error::Placeholder __WEB3FORMS_ACCESS_KEY__ not found in any page")
+          print(f"Web3Forms access key injected into {hit} pages.")
+          EOF
+
+      # Injecting a token rewrites main.js, so the ?v= query must change too or
+      # returning visitors keep serving the cached copy and never load the beacon.
+      # Versioning by commit means this is no longer a manual step to forget.
+      - name: Version assets by commit
+        run: |
+          python3 - <<'EOF'
+          import os, pathlib, re
+          v = os.environ["GITHUB_SHA"][:7]
+          n = 0
+          for p in pathlib.Path("_site").glob("*.html"):
+              s = p.read_text()
+              out = re.sub(r'(style\.css|main\.js)\?v=[0-9a-zA-Z]*',
+                           lambda m: f"{m.group(1)}?v={v}", s)
+              if out != s:
+                  p.write_text(out); n += 1
+          print(f"Assets versioned as ?v={v} across {n} pages.")
+          EOF
+
+      # Checked per file rather than by recursive grep: main.js deliberately keeps
+      # a literal __WEB3FORMS_ACCESS_KEY__ as the sentinel its form guard compares
+      # against, and a blanket search would flag that forever.
+      - name: Confirm no placeholders shipped unresolved
+        run: |
+          python3 - <<'EOF'
+          import pathlib
+          stale = []
+          if "__CF_BEACON_TOKEN__" in pathlib.Path("_site/main.js").read_text():
+              stale.append("main.js still holds the Cloudflare token - analytics is off")
+          pages = [p.name for p in pathlib.Path("_site").glob("*.html")
+                   if "__WEB3FORMS_ACCESS_KEY__" in p.read_text()]
+          if pages:
+              stale.append(f"{len(pages)} pages still hold the Web3Forms key - forms are off")
+          for s in stale:
+              print(f"::warning::{s}")
+          if not stale:
+              print("Both secrets resolved; no placeholders in the build output.")
+          EOF
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

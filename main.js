@@ -350,6 +350,34 @@
     });
   }
 
+  /* ── Traffic analytics ─────────────────────────────────
+     Cloudflare Web Analytics. Free and unlimited, and unlike Google Analytics
+     it sets no cookies, stores nothing on the visitor's device and does not
+     follow anyone across other sites. That is why the site carries no cookie
+     consent banner: there is no device storage to ask consent for.
+
+     The placeholder below is swapped for the real token at deploy time, from the
+     CF_BEACON_TOKEN Actions secret in .github/workflows/deploy.yml, so the token
+     never enters this repo. Do not paste a real one here.
+
+     It is still readable in the delivered page - the browser has to send it, and
+     no static site can avoid that. It grants no access to the Cloudflare
+     dashboard; the only abuse it allows is spoofed traffic in your own stats.
+
+     Measurement stays off while the placeholder stands, so local checkouts and
+     any unbuilt copy never fire a third-party request. See DEPLOY.md. */
+  var ANALYTICS_TOKEN = "__CF_BEACON_TOKEN__";
+
+  function initAnalytics() {
+    if (!ANALYTICS_TOKEN || ANALYTICS_TOKEN.indexOf("__") === 0) return;
+
+    var s = document.createElement("script");
+    s.defer = true;
+    s.src = "https://static.cloudflareinsights.com/beacon.min.js";
+    s.setAttribute("data-cf-beacon", JSON.stringify({ token: ANALYTICS_TOKEN }));
+    document.head.appendChild(s);
+  }
+
   /* ── Boot ──────────────────────────────────────────────── */
   function init() {
     initMobileNav();
@@ -359,6 +387,7 @@
     initScrollEffects();
     initAnimations();
     initForms();
+    initAnalytics();
   }
 
   if (document.readyState === "loading") {
