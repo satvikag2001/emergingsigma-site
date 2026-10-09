@@ -1,26 +1,28 @@
 # Deploying emergingsigma.com
 
-The site is static, so publishing is: push to GitHub, turn on Pages, point the
-domain at it. Roughly 20 minutes of work plus DNS propagation.
+The site builds to static files, so publishing is: push to GitHub, turn on
+Pages, point the domain at it. Roughly 20 minutes of work plus DNS propagation.
 
-A GitHub Actions workflow does the publishing, so real keys live in repository
-secrets instead of in the code. Do step 1 before going live; steps 2 to 4 are the
+A GitHub Actions workflow builds and publishes it, so real keys live in
+repository secrets instead of in the code. Do step 1 before going live; steps 2 to 4 are the
 deploy itself, and step 5 adds analytics.
 
 ---
 
 ## 1. Connect the contact forms (do this first)
 
-Both forms carry the placeholder `__WEB3FORMS_ACCESS_KEY__` and deliver nothing
-until a real key is supplied. The key is never committed: the deploy workflow
-injects it from a repository secret.
+Both forms deliver nothing until a real key is supplied. The key is never
+committed: the deploy workflow passes it into the build from a repository secret.
 
-1. Go to <https://web3forms.com>, enter `support@emergingsigma.com`, and submit.
-   The access key arrives by email. No account or password is involved.
+1. Get an access key for `support@emergingsigma.com`, either way:
+   - Sign in at <https://app.web3forms.com/forms>, create a form with
+     `support@emergingsigma.com` as the recipient, and copy its access key; or
+   - Enter `support@emergingsigma.com` on <https://web3forms.com> and submit.
+     The key arrives by email; no account needed.
 2. In the repo on github.com: **Settings > Secrets and variables > Actions >
    New repository secret**
    - Name: `WEB3FORMS_ACCESS_KEY`
-   - Value: the key from the email
+   - Value: the access key
 3. Push any commit, or run the workflow by hand from the **Actions** tab.
 
 Until that secret exists the site still deploys; the build warns and ships the
@@ -91,9 +93,10 @@ Wait for the first run to go green under the **Actions** tab (a minute or two).
 The site will be live at `https://YOUR-USERNAME.github.io/emergingsigma-site/`
 before DNS is done.
 
-**If anything goes wrong,** set Source back to **Deploy from a branch**, `main`,
-`/ (root)`. That restores the old behaviour at once; you lose only the secret
-injection and the automatic cache-busting.
+**If a deploy goes wrong,** revert the commit and push, or open the last good run
+under the **Actions** tab and choose **Re-run all jobs**. Do not switch Source to
+**Deploy from a branch**: the branch holds the Next.js source, not a built site,
+so there would be nothing to serve.
 
 ---
 
@@ -171,7 +174,8 @@ The beacon works on GitHub Pages as-is; a free Cloudflare account is all it take
    ```
 
    You need **only the token**: the 32-character hex string inside the quotes.
-   Ignore the rest of the snippet, `main.js` already contains the loader.
+   Ignore the rest of the snippet, `components/Analytics.tsx` already contains
+   the loader.
 
 ### Storing it
 
@@ -214,16 +218,17 @@ under [After going live](#after-going-live).
 ## Publishing changes later
 
 ```bash
+npm run build          # optional, but catches mistakes before they reach the site
 git add -A
 git commit -m "what changed"
 git push
 ```
 
-Watch the run under the **Actions** tab; the site updates a minute or so later.
+Watch the run under the **Actions** tab; the site updates a minute or two later.
+If the build fails, the live site is untouched and the run log shows why.
 
-The old instruction to bump `?v=N` by hand no longer applies. The build stamps
-`style.css` and `main.js` with the commit SHA, so editing either file busts the
-cache on its own.
+There is nothing to bump for caching. Next.js fingerprints every CSS and JS
+filename, so a changed file gets a new name and browsers fetch it fresh.
 
 ---
 
@@ -238,10 +243,11 @@ cache on its own.
 
 ## Known gaps at launch
 
-- `assets/img/hero-product-quality.jpg` is a stand-in copied from
-  `equipment-split.jpg`. See `assets/img/CREDITS.md`.
-- The 12 download buttons on `resources.html` link to `#`. Left as-is by
-  decision; wire them to files in `docs/` when the PDFs exist.
+- `public/assets/img/hero-product-quality.jpg` is a stand-in copied from
+  `equipment-split.jpg`. See `public/assets/img/CREDITS.md`.
+- The 12 download buttons on the resources page link to `#`. Left as-is by
+  decision; when the PDFs exist, put them in `public/docs/` and set each
+  entry's `href` in `lib/resources.ts`.
 - The `WEB3FORMS_ACCESS_KEY` secret is not set, so submissions go nowhere. See
   step 1. **This is live on the deployed site right now** - every enquiry is
   being turned away with "This form is not connected yet." Fix this first.
