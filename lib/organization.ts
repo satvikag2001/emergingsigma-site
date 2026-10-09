@@ -68,3 +68,35 @@ export const ORGANIZATION = {
     availableLanguage: ["en", "hi"],
   },
 };
+
+// The principal consultant, embedded on the About page. Every fact here is one
+// the About page already states; sameAs ties the site to the same person's
+// LinkedIn profile so search engines do not confuse him with namesakes.
+const credential = (name: string) => ({
+  "@type": "EducationalOccupationalCredential",
+  credentialCategory: "certification",
+  name,
+});
+
+export const PRINCIPAL = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://emergingsigma.com/about#manish-airan",
+  name: "Manish Airan",
+  jobTitle: "Principal Consultant",
+  url: "https://emergingsigma.com/about",
+  image: "https://emergingsigma.com/assets/manish-airan.jpg",
+  sameAs: ["https://www.linkedin.com/in/manish-airan/"],
+  worksFor: { "@id": ORGANIZATION["@id"] },
+  alumniOf: [
+    { "@type": "CollegeOrUniversity", name: "BITS Pilani" },
+    { "@type": "CollegeOrUniversity", name: "IIM Calcutta" },
+  ],
+  hasCredential: [
+    credential("ASQ Certified Manager of Quality / Organizational Excellence (CMQ/OE)"),
+    credential("ASQ Certified Six Sigma Black Belt"),
+    credential("ISO 13485 and ISO 9001 Lead Auditor"),
+    credential("VDA 6.3 Process Auditor"),
+  ],
+  knowsAbout: ORGANIZATION.knowsAbout,
+};

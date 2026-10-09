@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import StatNumber from "@/components/StatNumber";
+import JsonLd from "@/components/JsonLd";
 import { pageMetadata } from "@/lib/metadata";
+import { PRINCIPAL } from "@/lib/organization";
 
 export const metadata: Metadata = pageMetadata({
   title: "About Us | Emerging Sigma Consulting",
@@ -13,6 +15,7 @@ export const metadata: Metadata = pageMetadata({
 export default function AboutPage() {
   return (
     <>
+      <JsonLd data={PRINCIPAL} />
       <div className="breadcrumb">
         <div className="wrap">
           <div className="bc-inner">
