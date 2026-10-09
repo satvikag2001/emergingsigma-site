@@ -25,9 +25,13 @@ export default function HomePage() {
         <div className="hero-bg"></div>
         <div className="wrap hero-content">
           <div className="hero-tag">Medical Device Specialists</div>
-          <h1>
+          <h1 className="hero-h1">Medical Device Regulatory &amp; Quality Consultant in India</h1>
+          <h2 className="headline">
             Turning Your Innovation into <span className="hl">Market Access</span>
-          </h1>
+          </h2>
+          <p className="hero-services">
+            CDSCO Registration, ISO 13485, EU MDR/IVDR, US FDA and WHO Prequalification Consulting
+          </p>
           <p className="hero-sub">
             Quality, regulatory and lean digital solutions that help medical device companies scale
             with confidence.

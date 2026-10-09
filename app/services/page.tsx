@@ -17,7 +17,7 @@ export default function ServicesPage() {
       <Breadcrumbs trail={[{ name: "Our Services", href: "/services" }]} />
       <div className="page-hero">
         <div className="wrap">
-          <h1>Our Services</h1>
+          <h1>Medical Device Regulatory &amp; Quality Consulting Services</h1>
           <p>
             Nine connected practice areas. Two of them are what most clients come for. The other
             four are usually what makes the first two hold.

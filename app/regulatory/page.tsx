@@ -35,10 +35,13 @@ export default function RegulatoryPage() {
             <span className="dot"></span>
             Regulatory Affairs
           </div>
-          <h1>
+          <h1 className="hero-h1">
+            Medical Device Registration Consultant for India and Global Markets
+          </h1>
+          <h2 className="headline">
             Your Device Is Ready.{" "}
             <span className="hl">Getting It Approved Should Not Take Two Years.</span>
-          </h1>
+          </h2>
           <p className="lead">
             Most CDSCO timelines slip not because the device fails, but because the dossier invites
             questions. We build submissions that{" "}
