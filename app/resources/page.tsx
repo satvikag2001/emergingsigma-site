@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import ResourceLibrary from "@/components/ResourceLibrary";
 import { pageMetadata } from "@/lib/metadata";
 
@@ -13,15 +13,7 @@ export const metadata: Metadata = pageMetadata({
 export default function ResourcesPage() {
   return (
     <>
-      <div className="breadcrumb">
-        <div className="wrap">
-          <div className="bc-inner">
-            <Link href="/">Home</Link>
-            <span>›</span>
-            <span>Resources</span>
-          </div>
-        </div>
-      </div>
+      <Breadcrumbs trail={[{ name: "Resources", href: "/resources" }]} />
       <div className="page-hero">
         <div className="wrap">
           <h1>Regulatory Resources &amp; Updates</h1>

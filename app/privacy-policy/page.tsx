@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = pageMetadata({
@@ -12,15 +12,7 @@ export const metadata: Metadata = pageMetadata({
 export default function PrivacyPolicyPage() {
   return (
     <>
-      <div className="breadcrumb">
-        <div className="wrap">
-          <div className="bc-inner">
-            <Link href="/">Home</Link>
-            <span>›</span>
-            <span>Privacy Policy</span>
-          </div>
-        </div>
-      </div>
+      <Breadcrumbs trail={[{ name: "Privacy Policy", href: "/privacy-policy" }]} />
       <div className="page-hero">
         <div className="wrap">
           <h1>Privacy Policy</h1>

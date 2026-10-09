@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Breadcrumbs from "@/components/Breadcrumbs";
+import JsonLd from "@/components/JsonLd";
 import { TabPanel, Tabs } from "@/components/Tabs";
+import { preloadHero } from "@/lib/hero";
 import { pageMetadata } from "@/lib/metadata";
+import { serviceSchema } from "@/lib/organization";
 
 export const metadata: Metadata = pageMetadata({
   title:
@@ -12,19 +16,17 @@ export const metadata: Metadata = pageMetadata({
 });
 
 export default function SupplierQualityPage() {
+  preloadHero("hero-supplier");
+
   return (
     <>
-      <div className="breadcrumb">
-        <div className="wrap">
-          <div className="bc-inner">
-            <Link href="/">Home</Link>
-            <span>›</span>
-            <Link href="/services">Our Services</Link>
-            <span>›</span>
-            <span>Supplier Quality Management</span>
-          </div>
-        </div>
-      </div>
+      <JsonLd data={serviceSchema("Supplier Quality Management", "/supplier-quality")} />
+      <Breadcrumbs
+        trail={[
+          { name: "Our Services", href: "/services" },
+          { name: "Supplier Quality Management", href: "/supplier-quality" },
+        ]}
+      />
       <section className="eq-hero">
         <div className="sq-hero-bg"></div>
         <div className="eq-hero-overlay"></div>

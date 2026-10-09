@@ -42,6 +42,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           }}
         />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link
           href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@300;400;600;700&display=swap"
           rel="stylesheet"
@@ -50,7 +51,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body>
         <SiteHeader />
         <QuickEnquiry />
-        {children}
+        <main>{children}</main>
         <SiteFooter />
         <Analytics />
       </body>

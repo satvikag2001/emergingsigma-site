@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Breadcrumbs from "@/components/Breadcrumbs";
+import JsonLd from "@/components/JsonLd";
 import { TabPanel, Tabs } from "@/components/Tabs";
+import { preloadHero } from "@/lib/hero";
 import { pageMetadata } from "@/lib/metadata";
+import { serviceSchema } from "@/lib/organization";
 
 export const metadata: Metadata = pageMetadata({
   title: "Warehouse Management & Logistics Quality | Emerging Sigma Consulting",
@@ -11,19 +15,19 @@ export const metadata: Metadata = pageMetadata({
 });
 
 export default function WarehouseLogisticsQualityPage() {
+  preloadHero("hero-supplier");
+
   return (
     <>
-      <div className="breadcrumb">
-        <div className="wrap">
-          <div className="bc-inner">
-            <Link href="/">Home</Link>
-            <span>›</span>
-            <Link href="/services">Our Services</Link>
-            <span>›</span>
-            <span>Warehouse &amp; Logistics Quality</span>
-          </div>
-        </div>
-      </div>
+      <JsonLd
+        data={serviceSchema("Warehouse & Logistics Quality", "/warehouse-logistics-quality")}
+      />
+      <Breadcrumbs
+        trail={[
+          { name: "Our Services", href: "/services" },
+          { name: "Warehouse & Logistics Quality", href: "/warehouse-logistics-quality" },
+        ]}
+      />
       <section className="eq-hero">
         <div className="wh-hero-bg"></div>
         <div className="eq-hero-overlay"></div>

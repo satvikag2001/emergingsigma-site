@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import StatNumber from "@/components/StatNumber";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import JsonLd from "@/components/JsonLd";
+import StatNumber from "@/components/StatNumber";
 import { pageMetadata } from "@/lib/metadata";
 import { PRINCIPAL } from "@/lib/organization";
 
@@ -16,15 +16,7 @@ export default function AboutPage() {
   return (
     <>
       <JsonLd data={PRINCIPAL} />
-      <div className="breadcrumb">
-        <div className="wrap">
-          <div className="bc-inner">
-            <Link href="/">Home</Link>
-            <span>›</span>
-            <span>About Us</span>
-          </div>
-        </div>
-      </div>
+      <Breadcrumbs trail={[{ name: "About Us", href: "/about" }]} />
       <div className="page-hero">
         <div className="wrap">
           <h1>About Emerging Sigma Consulting</h1>

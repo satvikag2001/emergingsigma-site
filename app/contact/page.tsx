@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import Web3Form from "@/components/Web3Form";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import JsonLd from "@/components/JsonLd";
+import Web3Form from "@/components/Web3Form";
 import { pageMetadata } from "@/lib/metadata";
 import { ORGANIZATION } from "@/lib/organization";
 
@@ -16,15 +16,7 @@ export default function ContactPage() {
   return (
     <>
       <JsonLd data={ORGANIZATION} />
-      <div className="breadcrumb">
-        <div className="wrap">
-          <div className="bc-inner">
-            <Link href="/">Home</Link>
-            <span>›</span>
-            <span>Contact Us</span>
-          </div>
-        </div>
-      </div>
+      <Breadcrumbs trail={[{ name: "Contact Us", href: "/contact" }]} />
       <div className="page-hero">
         <div className="wrap">
           <h1>Contact Us</h1>

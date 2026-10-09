@@ -7,6 +7,10 @@ without attribution. Credit is recorded here as good practice.
 They were originally hotlinked from `images.unsplash.com`; they are now downloaded and
 served from this repository so the site has no third-party image dependency.
 
+The site serves WebP copies of these JPEGs, made automatically by
+`scripts/build-images.mjs` before every `npm run dev` and `npm run build`. To change a
+photo, replace the JPEG and keep its name; the WebP follows on the next build.
+
 | File | Unsplash photo ID | Used by |
 |---|---|---|
 | `hero-home.jpg` | `photo-1576091160550-2173dba999ef` | `.hero-bg`, home page hero |

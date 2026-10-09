@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Breadcrumbs from "@/components/Breadcrumbs";
+import JsonLd from "@/components/JsonLd";
+import { preloadHero } from "@/lib/hero";
 import { pageMetadata } from "@/lib/metadata";
+import { serviceSchema } from "@/lib/organization";
 
 export const metadata: Metadata = pageMetadata({
   title: "Equipment Qualification | Emerging Sigma Consulting",
@@ -10,19 +14,17 @@ export const metadata: Metadata = pageMetadata({
 });
 
 export default function EquipmentQualificationPage() {
+  preloadHero("hero-equipment");
+
   return (
     <>
-      <div className="breadcrumb">
-        <div className="wrap">
-          <div className="bc-inner">
-            <Link href="/">Home</Link>
-            <span>›</span>
-            <Link href="/services">Our Services</Link>
-            <span>›</span>
-            <span>Equipment Qualification</span>
-          </div>
-        </div>
-      </div>
+      <JsonLd data={serviceSchema("Equipment Qualification", "/equipment-qualification")} />
+      <Breadcrumbs
+        trail={[
+          { name: "Our Services", href: "/services" },
+          { name: "Equipment Qualification", href: "/equipment-qualification" },
+        ]}
+      />
       {/* ═══ HERO ═══ */}
       <section className="eq-hero">
         <div className="eq-hero-bg"></div>
@@ -233,7 +235,7 @@ export default function EquipmentQualificationPage() {
           <div className="img-split fade-up">
             <div
               className="img-split-photo"
-              style={{ backgroundImage: "url('assets/img/equipment-split.jpg')" }}
+              style={{ backgroundImage: "url('/assets/img/equipment-split.webp')" }}
             ></div>
             <div className="img-split-body">
               <span className="sec-tag" style={{ color: "#a8e063" }}>

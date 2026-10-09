@@ -100,3 +100,26 @@ export const PRINCIPAL = {
   ],
   knowsAbout: ORGANIZATION.knowsAbout,
 };
+
+// Names the site itself, which Google uses for the site name shown in results.
+export const WEBSITE = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://emergingsigma.com/#website",
+  name: "Emerging Sigma Consulting",
+  url: "https://emergingsigma.com/",
+  publisher: { "@id": ORGANIZATION["@id"] },
+};
+
+/** A service page described as a service the practice provides. `name` is the page's breadcrumb name. */
+export function serviceSchema(name: string, path: string) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name,
+    serviceType: name,
+    url: `https://emergingsigma.com${path}`,
+    provider: { "@id": ORGANIZATION["@id"] },
+    areaServed: ORGANIZATION.areaServed,
+  };
+}

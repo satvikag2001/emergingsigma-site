@@ -9,3 +9,6 @@ out/
 next-env.d.ts
 *.tsbuildinfo
 .env*.local
+
+# Generated from the JPEGs by scripts/build-images.mjs
+public/assets/img/*.webp

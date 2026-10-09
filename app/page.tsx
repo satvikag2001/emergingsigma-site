@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import StatNumber from "@/components/StatNumber";
 import JsonLd from "@/components/JsonLd";
+import StatNumber from "@/components/StatNumber";
+import { preloadHero } from "@/lib/hero";
 import { pageMetadata } from "@/lib/metadata";
-import { ORGANIZATION } from "@/lib/organization";
+import { ORGANIZATION, WEBSITE } from "@/lib/organization";
 
 export const metadata: Metadata = pageMetadata({
   title: "Emerging Sigma Consulting | Turning Your Innovation into Market Access",
@@ -13,9 +14,12 @@ export const metadata: Metadata = pageMetadata({
 });
 
 export default function HomePage() {
+  preloadHero("hero-home");
+
   return (
     <>
       <JsonLd data={ORGANIZATION} />
+      <JsonLd data={WEBSITE} />
       {/* HERO */}
       <section className="hero">
         <div className="hero-bg"></div>

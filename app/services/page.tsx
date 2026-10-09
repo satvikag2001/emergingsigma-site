@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import StatNumber from "@/components/StatNumber";
 import { pageMetadata } from "@/lib/metadata";
 
@@ -13,15 +14,7 @@ export const metadata: Metadata = pageMetadata({
 export default function ServicesPage() {
   return (
     <>
-      <div className="breadcrumb">
-        <div className="wrap">
-          <div className="bc-inner">
-            <Link href="/">Home</Link>
-            <span>›</span>
-            <span>Our Services</span>
-          </div>
-        </div>
-      </div>
+      <Breadcrumbs trail={[{ name: "Our Services", href: "/services" }]} />
       <div className="page-hero">
         <div className="wrap">
           <h1>Our Services</h1>
