@@ -18,9 +18,6 @@ export const metadata: Metadata = {
     apple: "/assets/apple-touch-icon.png",
   },
   manifest: "/site.webmanifest",
-  // Proves ownership to Google Search Console (property https://emergingsigma.com/).
-  // Not a secret; removing it can un-verify the property, so leave it in place.
-  verification: { google: "yC33O2ZD9AIrWlijMgZs47b32FzBDz2VJDna8bFo1iA" },
 };
 
 export const viewport: Viewport = {
