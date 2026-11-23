@@ -191,21 +191,100 @@ p{color:var(--gray5);line-height:1.8;font-size:15px}
 .res-filter:last-child{border-bottom:none}
 .res-filter:hover,.res-filter.active{background:var(--gray2);color:var(--teal)}
 .res-filter .cnt{background:var(--gray2);color:var(--gray5);font-size:11px;font-weight:600;padding:2px 8px;border-radius:100px}
-.res-filter.active .cnt{background:rgba(109,179,63,.15);color:var(--green2)}
+.res-filter.active .cnt{background:rgba(109,179,63,.15);color:#3f7a1f}
 .res-table{background:#fff;border:1px solid var(--border);border-radius:var(--r2);overflow:hidden}
-.res-thead{display:grid;grid-template-columns:90px 1fr 150px 100px 90px;padding:11px 22px;background:var(--gray1);border-bottom:1px solid var(--border);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray4)}
-.res-row{display:grid;grid-template-columns:90px 1fr 150px 100px 90px;padding:15px 22px;border-bottom:1px solid var(--border);align-items:center;transition:background .12s}
+.res-thead{display:grid;grid-template-columns:100px 1fr 120px 130px 80px;padding:11px 22px;background:var(--gray1);border-bottom:1px solid var(--border);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray4)}
+.res-row{display:grid;grid-template-columns:100px 1fr 120px 130px 80px;padding:15px 22px;border-bottom:1px solid var(--border);align-items:center;transition:background .12s}
 .res-row:last-child{border-bottom:none}
 .res-row:hover{background:var(--gray1)}
-.res-date{font-size:12px;color:var(--gray4)}
+.res-date{font-size:12px;color:var(--gray5)}
 .res-title{font-size:13.5px;font-weight:600;color:var(--teal);line-height:1.4}
-.res-title small{display:block;font-size:12px;font-weight:400;color:var(--gray4);margin-top:2px}
+.res-title small{display:block;font-size:12px;font-weight:400;color:var(--gray5);margin-top:2px}
 .tag{display:inline-block;padding:3px 10px;background:var(--gray2);color:var(--teal);border-radius:100px;font-size:11px;font-weight:600;letter-spacing:.04em}
-.tag-g{background:rgba(109,179,63,.12);color:var(--green2)}
+.tag-g{background:rgba(109,179,63,.12);color:#3f7a1f}
 .res-dl a{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:700;color:var(--teal);padding:5px 11px;border:1.5px solid var(--border);border-radius:var(--r);transition:all .15s}
 .res-dl a:hover{background:var(--teal);color:#fff;border-color:var(--teal)}
 .res-search{width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:var(--r);font-family:'Open Sans',sans-serif;font-size:14px;color:var(--gray6);outline:none;transition:border-color .2s;margin-bottom:16px}
 .res-search:focus{border-color:var(--teal)}
+/* Document library (lib/resources.ts, components/ResourceLibrary.tsx). Greys and
+   greens here are a shade darker than the tokens so small text meets WCAG AA. */
+.res-filter-group+.res-sidebar-title{border-top:1px solid var(--border)}
+.res-title a{color:inherit}
+.res-title a:hover,.res-hit-title:hover{text-decoration:underline}
+.res-tags .tag+.tag,.doc-tags .tag+.tag{margin-left:4px}
+.tag-d{background:#fcefdc;color:#8a4b0f}
+.res-status{font-size:13px;color:var(--gray5);margin-bottom:14px}
+.res-empty{padding:48px;text-align:center}
+.res-note{font-size:13px;color:#8a4b0f;background:#fcefdc;border-radius:var(--r);padding:10px 14px;margin-bottom:14px}
+.res-hits{list-style:none;display:flex;flex-direction:column;gap:14px;margin-bottom:18px}
+.res-hit{background:#fff;border:1px solid var(--border);border-radius:var(--r2);padding:18px 22px;min-width:0}
+.res-hit-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+.res-hit-title{font-size:15px;font-weight:700;color:var(--teal);line-height:1.4;overflow-wrap:anywhere}
+.res-hit-meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;margin-top:6px;font-size:12px;color:var(--gray5)}
+.res-hit-count{font-weight:700;color:var(--teal)}
+.res-pages{list-style:none;margin-top:12px;border-top:1px solid var(--border)}
+.res-page{display:grid;grid-template-columns:52px 1fr;gap:10px;padding:10px 0;border-bottom:1px solid var(--gray2)}
+.res-page:last-child{border-bottom:none;padding-bottom:0}
+.res-page-no{font-size:12px;font-weight:700;color:var(--teal);white-space:nowrap;line-height:1.6}
+.res-snips{list-style:none;display:flex;flex-direction:column;gap:6px;min-width:0}
+.res-snips a{display:block;font-size:13px;line-height:1.6;color:var(--gray6);overflow-wrap:anywhere}
+.res-snips a:hover{color:var(--teal)}
+.res-snips mark{background:#ffe68a;color:inherit;border-radius:2px;padding:0 1px}
+.res-partial-title{font-size:17px;margin:28px 0 12px}
+.res-more{display:block;margin:6px auto 0}
+.res-main{min-width:0}
+
+/* Document page and PDF viewer (app/resources/[id], components/PdfViewer.tsx) */
+.doc-hero h1{font-size:clamp(22px,3vw,34px);max-width:960px;overflow-wrap:anywhere}
+.doc-meta{margin-bottom:12px}
+.doc-tags{margin-bottom:22px}
+.doc-tags .tag-g{background:#e9f4e1}
+.doc-actions{display:flex;flex-wrap:wrap;gap:12px}
+.doc-actions .btn-light{background:#fff;color:var(--teal);border-color:#fff}
+.doc-actions .btn-light:hover{background:var(--gray2);border-color:var(--gray2)}
+.doc-sec{padding-top:32px}
+.pdfv{border:1px solid var(--border);border-radius:var(--r2);overflow:hidden;background:#fff;scroll-margin-top:84px}
+.pdfv-bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px;padding:10px 12px;background:var(--gray1);border-bottom:1px solid var(--border)}
+.pdfv-group{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.pdfv-find{flex:1 1 300px;justify-content:flex-end}
+.pdfv-btn{min-width:34px;height:34px;padding:0 9px;border:1.5px solid var(--border);border-radius:var(--r);background:#fff;color:var(--teal);font-size:16px;font-weight:700;line-height:1;cursor:pointer;font-family:'Open Sans',sans-serif}
+.pdfv-btn:hover:not(:disabled){border-color:var(--teal)}
+.pdfv-btn:disabled{opacity:.45;cursor:default}
+.pdfv-text{font-size:12.5px}
+.pdfv-pageform{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--gray5)}
+.pdfv-pageinput,.pdfv-findinput{height:34px;border:1.5px solid var(--border);border-radius:var(--r);font-size:13px;font-family:'Open Sans',sans-serif;color:var(--gray6);background:#fff;outline:none}
+.pdfv-pageinput{width:52px;padding:0 6px;text-align:center}
+.pdfv-findinput{flex:1 1 160px;min-width:0;padding:0 10px}
+.pdfv-pageinput:focus,.pdfv-findinput:focus{border-color:var(--teal);box-shadow:0 0 0 2px rgba(13,82,70,.18)}
+.pdfv-count{font-size:12.5px;color:var(--gray5);min-width:100px}
+.pdfv-frame{position:relative;height:calc(100vh - 150px);height:calc(100svh - 150px);min-height:420px;max-height:1100px;background:var(--gray3)}
+/* PDF.js requires the scrolling container to be absolutely positioned. */
+.pdfv-scroll{position:absolute;inset:0;overflow:auto}
+.pdfv-scroll:focus-visible{outline:2px solid var(--teal);outline-offset:-2px}
+.pdfv-msg{position:absolute;left:0;right:0;top:38%;margin:0;padding:0 24px;text-align:center;font-size:14px;color:var(--gray6)}
+.pdfv-msg a{color:var(--teal);font-weight:700;text-decoration:underline}
+/* PDF.js lays its pages out with the browser default, content-box: a 9px page
+   border sits outside the canvas. The reset at the top of this file makes
+   everything border-box, which shrinks the canvas inside that border while the
+   invisible text layer keeps its true size, so highlights and selection drift
+   away from the words. Zero specificity (:where) so it beats only the reset and
+   never a rule of PDF.js's own. */
+:where(.pdfViewer),:where(.pdfViewer) :where(*),:where(.pdfViewer) :where(*)::before,:where(.pdfViewer) :where(*)::after{box-sizing:content-box}
+@media not (forced-colors:active){
+  .pdfv .textLayer .highlight{--highlight-bg-color:rgb(255 200 0 / .4);--highlight-selected-bg-color:rgb(13 82 70 / .4)}
+}
+@media(max-width:900px){
+  .res-filter-group{display:flex;flex-wrap:wrap;gap:6px;padding:10px 12px}
+  .res-filter,.res-filter:last-child{width:auto;gap:8px;padding:6px 12px;border:1px solid var(--border);border-radius:100px}
+}
+@media(max-width:600px){
+  .res-hit{padding:16px}
+  .res-hit-head{flex-direction:column;gap:10px}
+  .res-page{grid-template-columns:44px 1fr}
+  .pdfv-bar{gap:8px 12px}
+  .pdfv-find{flex-basis:100%;justify-content:flex-start}
+  .pdfv-frame{height:calc(100vh - 210px);height:calc(100svh - 210px)}
+}
 .add-note{background:rgba(109,179,63,.08);border:1px solid rgba(109,179,63,.3);border-radius:var(--r2);padding:16px 20px;margin-bottom:20px}
 .add-note h4{font-size:13px;color:var(--green2);margin-bottom:6px;font-family:'Open Sans',sans-serif}
 .add-note p{font-size:12.5px;color:var(--gray5)}
@@ -1222,7 +1301,7 @@ p{color:var(--gray5);line-height:1.8;font-size:15px}
 @media(max-width:1000px){
   .res-thead{display:none}
   .res-row{grid-template-columns:1fr;gap:9px;padding:18px}
-  .res-date{font-size:12px;color:var(--gray4);order:-1}
+  .res-date{font-size:12px;color:var(--gray5);order:-1}
   .res-dl{justify-self:start}
   .res-row>div:nth-child(3),
   .res-row>div:nth-child(4){display:inline-block;margin-right:6px}

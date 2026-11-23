@@ -1,8 +1,10 @@
 import type { MetadataRoute } from "next";
 import { execFileSync } from "node:child_process";
 import { SITE_URL } from "@/lib/metadata";
+import { RESOURCES, docPath } from "@/lib/resources";
 
-// Written to out/sitemap.xml at build time. Add a page here when you add one.
+// Written to out/sitemap.xml at build time. Add a page here when you add one;
+// document pages under /resources come from lib/resources.ts automatically.
 export const dynamic = "force-static";
 
 type Page = {
@@ -82,10 +84,18 @@ function lastModified(file: string): Date {
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return PAGES.map((p) => ({
+  const pages = PAGES.map((p) => ({
     url: SITE_URL + p.path,
     lastModified: lastModified(p.file),
     changeFrequency: p.changeFrequency,
     priority: p.priority,
   }));
+  // A document page changes when its PDF does.
+  const documents = RESOURCES.map((r) => ({
+    url: SITE_URL + docPath(r.id),
+    lastModified: lastModified(`public/docs/${r.id}.pdf`),
+    changeFrequency: "yearly" as const,
+    priority: 0.6,
+  }));
+  return [...pages, ...documents];
 }

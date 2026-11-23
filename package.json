@@ -2,19 +2,22 @@
   "name": "emergingsigma-site",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "engines": {
-    "node": ">=20.9"
+    "node": ">=22.18"
   },
   "scripts": {
-    "predev": "node scripts/build-images.mjs",
+    "predev": "node scripts/build-images.mjs && node scripts/build-doc-index.mjs",
     "dev": "next dev",
-    "prebuild": "node scripts/build-images.mjs",
+    "prebuild": "node scripts/build-images.mjs && node scripts/build-doc-index.mjs",
     "build": "next build",
     "start": "npx serve@latest out",
+    "test": "node --test \"lib/**/*.test.ts\"",
     "format": "prettier --write ."
   },
   "dependencies": {
     "next": "16.4.6",
+    "pdfjs-dist": "6.5.438",
     "react": "19.3.0",
     "react-dom": "19.3.0"
   },
