@@ -54,24 +54,25 @@ below is the order to do them in.
   - Depends on: Task 1 and the owner's choice of route. Scope: XS.
 
 - [ ] **Task 2 (owner): The owner reviews the 57 titles**
-  - Give the owner a one-page list (number, date, title); apply the changes to
-    `lib/resources.ts`.
+  - The list is ready: [review.md](review.md), section 1 (items T1 to T57). Waiting for the
+    owner's reply; then apply the changes to `lib/resources.ts`.
   - Done when: every title is approved or replaced; each flagged item has a decision; every
     document page still has a unique title.
   - Verify: `npm test`, `npm run build`, look at `/resources`.
   - Depends on: owner input. Scope: Small.
 
 - [ ] **Task 3 (owner): The owner reviews the new wording**
-  - Filter labels, empty-filter message, search status lines, headings, buttons, viewer
-    labels and messages, and the page title and description templates.
+  - The list is ready: [review.md](review.md), section 2 (items W1 to W27): filter labels,
+    empty-filter message, search status lines, headings, buttons, viewer labels and
+    messages, and the page title and description templates. Waiting for the owner's reply.
   - Done when: each string and both templates are approved or replaced; no draft string
     remains; tests that assert wording match.
   - Verify: `npm test`, `npm run build`, browser checks.
   - Depends on: owner input. Scope: Medium.
 
 - [ ] **Task 4 (owner): Decide two existing texts that now read slightly off**
-  - The search placeholder ("…by title or keyword…") and the column heading
-    "Title / Description".
+  - In [review.md](review.md), section 3 (items E1 and E2): the search placeholder
+    ("…by title or keyword…") and the column heading "Title / Description".
   - Done when: the owner has chosen keep or change for each; the page shows the chosen text.
   - Verify: `npm run build`, look at `/resources` at desktop width and 375 px.
   - Depends on: owner input. Scope: XS.
