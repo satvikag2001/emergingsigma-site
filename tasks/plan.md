@@ -34,8 +34,8 @@ Success criteria in SPEC.md:
   29 checks, plus checksum, sitemap and metadata checks.
 - **Partly verified:**
   - 4 (page 200 of the 250-page rules within 3 s): measured only on this machine, 0.4 s.
-  - 10 (accessibility): 375 px layout and keyboard use checked; the Lighthouse score has not
-    been measured.
+  - 10 (accessibility): met. 375 px layout and keyboard use checked; Lighthouse scores 95
+    (Task 5).
   - 12 (deploy workflow checks): `CNAME` and `404.html` exist in the local build; the
     workflow itself only runs on a push to `main`.
 
@@ -85,7 +85,8 @@ Built and committed on document-library
         +-- T4  Two existing texts ............... owner
         +-- T6  DEPLOY.md known gaps ............. done
         |
-        +-- T5  Measure accessibility ............ after T1-T4 (final text and viewer)
+        +-- T5  Measure accessibility ............ done early; rerun at the checkpoint if
+        |                                          T2-T4 change anything visible
         |
         v
   CHECKPOINT A: ready to release (owner sign-off)
@@ -300,9 +301,11 @@ one-off Lighthouse download for this; run it without adding it to `package.json`
 then fix or record each failing audit.
 
 **Acceptance criteria:**
-- [ ] Both pages score at least 95, or every failing audit is fixed or recorded in SPEC.md
-      with the reason.
-- [ ] Fixes do not change approved wording.
+- [x] Both pages score at least 95, or every failing audit is fixed or recorded in SPEC.md
+      with the reason. (95 on both, and on the search results and a document opened at a
+      match; measured 2026-11-23, before Tasks 2 to 4, so rerun at Checkpoint A if those
+      change anything visible.)
+- [x] Fixes do not change approved wording. (One colour changed; no text.)
 
 **Verification:**
 - [ ] Lighthouse accessibility run on `/resources` and on `/resources/gsr-78e-20170131`
@@ -346,6 +349,7 @@ three, and check the secrets with `gh secret list` while doing it.
 - [ ] `npm test` passes and `npm run build` succeeds
 - [ ] Browser checks pass in Chromium and Firefox; Safari checked (Task 1b)
 - [ ] The owner has approved the titles and all wording
+- [ ] Lighthouse accessibility rerun if Tasks 2 to 4 changed anything visible (still 95+)
 - [ ] The owner gives explicit sign-off to deploy
 
 ### Task 7: Release: merge to `main` and push

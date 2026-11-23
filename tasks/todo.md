@@ -81,13 +81,14 @@ below is the order to do them in.
   - Done 2026-11-23. Removed the "12 download buttons link to #" item and the two "secret is
     not set" items; `gh secret list` shows `WEB3FORMS_ACCESS_KEY` and `CF_BEACON_TOKEN`.
 
-- [ ] **Task 5: Measure accessibility**
-  - Lighthouse accessibility on `/resources` and one document page (SPEC.md criterion 10),
-    using a one-off Lighthouse download (approved; not added to `package.json`).
-  - Done when: both score at least 95, or every failing audit is fixed or recorded with the
-    reason.
-  - Verify: Lighthouse runs; `npm test`, `npm run build` and browser checks after any fix.
-  - Depends on: Tasks 1 to 4. Scope: Small.
+- [x] **Task 5: Measure accessibility**
+  - Done 2026-11-23, ahead of Tasks 2 to 4, with Lighthouse 13.6.0 run through `npx` (not
+    added to `package.json`): 95 on `/resources`, a document page, the search results and a
+    document opened at a match. One library defect found and fixed: the count on the selected
+    filter had a contrast of 4.1; the green is now darker (5.4).
+  - Recorded in SPEC.md, not changed: three site-wide items that predate the library
+    (breadcrumb text contrast, footer small print contrast, footer heading levels).
+  - If Tasks 2 to 4 change anything visible, run it once more (see Checkpoint A).
 
 ### Checkpoint A: Ready to release
 
@@ -96,6 +97,7 @@ below is the order to do them in.
 - [ ] `npm test` passes; `npm run build` succeeds
 - [ ] Browser checks pass in Chromium and Firefox; Safari checked (Task 1b)
 - [ ] The owner has approved the titles and all wording
+- [ ] Lighthouse accessibility rerun if Tasks 2 to 4 changed anything visible (still 95+)
 - [ ] The owner gives explicit sign-off to deploy
 
 ## Phase 2: Release

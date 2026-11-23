@@ -361,6 +361,13 @@ Conventions:
 10. At 375 px width neither `/resources` nor a document page scrolls horizontally. All
     controls are reachable and operable by keyboard. The Lighthouse accessibility score is at
     least 95 on `/resources` and on one document page.
+
+    Measured on 2026-11-23 with Lighthouse 13.6.0 (mobile): 95 on `/resources`, on a document
+    page, on the search results and on a document opened at a highlighted match. Nothing in
+    the library's own interface fails an audit. What keeps the score from 100 is on every page
+    of the site and older than the library, so it is outside this spec: the grey text of the
+    current page in the breadcrumb (contrast 2.4 against a required 4.5), the small print in
+    the footer (3.3 and 4.2), and the footer's column headings skipping a heading level.
 11. With JavaScript disabled, `/resources` shows the full list with working PDF links, and a
     document page shows its header and PDF links.
 12. `npm test` and `npm run build` pass locally, and the deploy workflow's output checks pass.
