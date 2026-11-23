@@ -126,6 +126,7 @@ public/docs/<id>.pdf             The 57 original PDFs, byte-identical to documen
 lib/resources.ts                 Hand-written catalog, one entry per PDF (entries and type replaced;
                                  CATEGORIES kept, KINDS added)
 .gitignore                       Adds documents.zip, public/search/, public/pdfjs/
+lib/resources.test.ts            Unit tests for the catalog: filters, counts, sorting, page titles
 lib/search.ts                    Pure search logic: parse query, match pages, rank, build snippets
 lib/search.test.ts               Unit tests for lib/search.ts
 scripts/build-doc-index.mjs      PDF -> per-page English text -> public/search/index.json;
@@ -284,8 +285,10 @@ Conventions:
   partial words, phrases, punctuation cases from B4, common words), ranking (catalog matches
   first, then occurrence count), snippets (every occurrence returned, window around the
   match, highlight ranges, start and end of page, nearby occurrences merged into one
-  snippet), category and type filtering (combined, and options with zero documents). Every
-  exported function is covered.
+  snippet). Every exported function is covered.
+- **Unit tests for `lib/resources.ts`**, where the filters live: category and type filtering
+  (each alone, combined, and options with zero documents), the counts shown beside each
+  filter, sorting, dates, page titles and descriptions, and the real catalog's totals (A2).
 - **Build-time checks** as data tests: D2, plus every document has at least one page of
   non-empty text and the page count in the index equals the PDF's page count.
 - **Manual checks in the browser**, against both `npm run dev` and the static `out/`

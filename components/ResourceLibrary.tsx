@@ -11,6 +11,7 @@ import {
   byNewest,
   catalogText,
   docPath,
+  filterCounts,
   formatDate,
   matchesFilters,
   pdfPath,
@@ -273,9 +274,7 @@ export default function ResourceLibrary() {
     return () => io.disconnect();
   }, [hidden, budget]);
 
-  const catCount = (id: CategoryFilter) => SORTED.filter((r) => matchesFilters(r, id, type)).length;
-  const typeCount = (id: TypeFilter) =>
-    SORTED.filter((r) => matchesFilters(r, category, id)).length;
+  const counts = useMemo(() => filterCounts(SORTED, category, type), [category, type]);
 
   let status: string;
   if (!result) {
@@ -378,7 +377,7 @@ export default function ResourceLibrary() {
               aria-pressed={category === c.id}
               onClick={() => setCategory(c.id)}
             >
-              {c.label} <span className="cnt">{catCount(c.id)}</span>
+              {c.label} <span className="cnt">{counts.categories[c.id]}</span>
             </button>
           ))}
         </div>
@@ -394,7 +393,7 @@ export default function ResourceLibrary() {
               aria-pressed={type === t.id}
               onClick={() => setType(t.id)}
             >
-              {t.label} <span className="cnt">{typeCount(t.id)}</span>
+              {t.label} <span className="cnt">{counts.types[t.id]}</span>
             </button>
           ))}
         </div>

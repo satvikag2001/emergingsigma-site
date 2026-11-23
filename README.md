@@ -49,6 +49,7 @@ lib/
   metadata.ts                Title, description, canonical, social tags per page
   organization.ts            Structured data (address, hours, contact) for search
   resources.ts               The document catalog (edit this to add a document)
+  resources.test.ts          Unit tests for its filters, counts and page titles
   search.ts                  Search logic: query parsing, matching, snippets
   search.test.ts             Its unit tests (npm test)
   paths.ts                   URL normalising for nav highlighting

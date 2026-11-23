@@ -641,6 +641,30 @@ export function matchesFilters(r: Resource, category: CategoryFilter, type: Type
   return (category === "all" || r.category === category) && (type === "all" || typeOf(r) === type);
 }
 
+/**
+ * How many documents each filter option would show. A group's counts follow the
+ * other group's selection, not its own, so they say what picking an option would
+ * give. Every option is present, including those with no documents yet.
+ */
+export function filterCounts(
+  list: readonly Resource[],
+  category: CategoryFilter,
+  type: TypeFilter,
+): { categories: Record<CategoryFilter, number>; types: Record<TypeFilter, number> } {
+  const count = (c: CategoryFilter, t: TypeFilter) =>
+    list.filter((r) => matchesFilters(r, c, t)).length;
+  return {
+    categories: Object.fromEntries(CATEGORIES.map((c) => [c.id, count(c.id, type)])) as Record<
+      CategoryFilter,
+      number
+    >,
+    types: Object.fromEntries(TYPES.map((t) => [t.id, count(category, t.id)])) as Record<
+      TypeFilter,
+      number
+    >,
+  };
+}
+
 /** Newest first; undated documents last, in id order so the list is stable. */
 export function byNewest(a: Resource, b: Resource): number {
   if (a.date && b.date) return b.date.localeCompare(a.date) || a.id.localeCompare(b.id);
