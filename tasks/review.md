@@ -1,15 +1,23 @@
-# For the owner's review: titles and wording
+# For the owner: titles and wording, for a later look
 
-Nothing below is live. It is on the branch `document-library` and goes out only after you
-approve it. Reply with the item numbers and your changes (for example "T12: change to …",
-"W5: fine"), or say "all fine" for a whole section. This sheet was generated from the code
-on 2026-11-23, so it shows exactly what the site would show.
+Status after the owner's decision of 2026-11-23:
+
+- **Section 1, titles: not used.** The site lists every document under its file name
+  (`gsr-78e-20170131.pdf`). The drafted titles below are kept only in case they are wanted
+  later; none of them is on the site.
+- **Section 2, new wording: live as drafted.** It went out with the release. Any item can
+  be changed afterwards.
+- **Section 3, two existing texts: unchanged.**
+
+To change anything, reply with the item numbers (for example "T12: use this title",
+"W5: change to …"). The sheet was generated from the code on 2026-11-23, before the
+decision, which is why it still shows the drafts.
 
 ## 1. Document titles (Task 2)
 
-Each title was drafted from the document's own text. Number, date and type are shown beside
-the title on the site, so they are not repeated inside it. The "Note" column marks the ones
-worth a closer look.
+Drafts only; the site shows file names instead. Each was drafted from the document's own
+text. Number, date and type are shown beside the name on the site. The "Note" column marks
+the ones that would need a closer look before use.
 
 | # | Number | Date | Type | Title | Note |
 |---|---|---|---|---|---|
@@ -73,8 +81,9 @@ worth a closer look.
 
 ## 2. New wording on the site (Task 3)
 
-Text the library added that you have not approved yet. "·" separates several short labels
-listed on one line; numbers in the examples change with the search.
+Text the library added, live as drafted. "·" separates several short labels listed on one
+line; numbers in the examples change with the search. In the title and description examples
+(W24 to W27) the site now shows the file name where a drafted title appears here.
 
 | # | Where it appears | Wording |
 |---|---|---|

@@ -79,9 +79,9 @@ Built and committed on document-library
         |
         +-- T1  Viewer on older browsers ......... done
         +-- T1b Safari check ..................... owner, on an Apple device after release
-        +-- T2  Owner reviews the 57 titles ...... owner
-        +-- T3  Owner reviews the new wording .... owner
-        +-- T4  Two existing texts ............... owner
+        +-- T2  Titles ........................... done: file names, by the owner's decision
+        +-- T3  New wording ...................... released as drafted, on instruction
+        +-- T4  Two existing texts ............... left as they are
         +-- T6  DEPLOY.md known gaps ............. done
         |
         +-- T5  Measure accessibility ............ done early; rerun at the checkpoint if
@@ -464,7 +464,11 @@ replaced them, and an end-to-end test framework.
 - **Safari (2026-11-23):** the owner checks on an Apple device after the release.
 - **Viewer on older browsers (2026-11-23):** accepted. The viewer needs Chrome or Edge 125+,
   Safari 18+ or a current Firefox; older browsers get the link to the PDF.
+- **Titles (2026-11-23):** none of the drafts. Documents are listed under their file names,
+  with no notes and no summaries. This closes Task 2.
+- **Release (2026-11-23):** publish right away. The new wording goes out as drafted (Task 3)
+  and the two existing texts stay as they are (Task 4); both can be revisited later.
 
 ## Open questions
 
-1. **Titles and wording.** Tasks 2, 3 and 4 wait on the owner's review (`tasks/review.md`).
+None. The drafted titles and the wording list stay in `tasks/review.md` for a later look.

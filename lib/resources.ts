@@ -4,7 +4,9 @@
    1. Drop the PDF into public/docs/. Its filename without .pdf is the document's
       id, and also its address: /docs/<id>.pdf and /resources/<id>.
    2. Add an entry below with that id. Order does not matter; the list is shown
-      newest first by `date`.
+      newest first by `date`. `title` is the file name: the owner chose to list
+      documents under their file names, so write "<id>.pdf" unless the owner gives
+      a title for it. A test checks this.
    3. Run `npm run build`. It stops with a clear message if a PDF has no entry or
       an entry has no PDF, and it rebuilds the full-text search index.
    `category` and the kind/status pair decide which filters a document sits
@@ -78,7 +80,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "circular",
     status: "final",
-    title: "Customs Clearance Checklists for Imported Cosmetics, Drugs and Medical Devices",
+    title: "guidance-circular-no-40-2026.pdf",
   },
   {
     id: "gsr-744e-20260814",
@@ -87,8 +89,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "final",
-    title:
-      "Medical Devices (Third Amendment) Rules, 2026: QMS for Class A Registration, EU Countries in Rule 63",
+    title: "gsr-744e-20260814.pdf",
     keywords: "NSNM QMS",
   },
   {
@@ -98,8 +99,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "final",
-    title:
-      "Medical Devices (Second Amendment) Rules, 2026: Test Fees and Sterilization Site Labelling",
+    title: "gsr-743e-20260814.pdf",
   },
   {
     id: "gsr-270e-20260410-draft",
@@ -108,7 +108,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "draft",
-    title: "Medical Devices (Amendment) Rules, 2026: Test Fees and Sterilization Site Labelling",
+    title: "gsr-270e-20260410-draft.pdf",
     keywords: "G.S.R. 743(E) Medical Devices (Second Amendment) Rules, 2026",
   },
   {
@@ -118,8 +118,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "draft",
-    title:
-      "Medical Devices (Amendment) Rules, 2026: QMS for Class A Registration, EU Countries in Rule 63",
+    title: "gsr-269e-20260410-draft.pdf",
     keywords: "NSNM QMS G.S.R. 744(E) Medical Devices (Third Amendment) Rules, 2026",
   },
   {
@@ -129,8 +128,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "final",
-    title:
-      "Medical Devices (Amendment) Rules, 2026: Inspector and Government Analyst Qualifications",
+    title: "gsr-165e-20260302.pdf",
   },
   {
     id: "so-912e-20260218",
@@ -139,7 +137,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "final",
-    title: "Medical Device Testing Officers: Revised Designations, Expanded Laboratory Scope",
+    title: "so-912e-20260218.pdf",
   },
   {
     id: "gsr-883e-20251204-draft",
@@ -148,7 +146,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "draft",
-    title: "Medical Devices (Amendment) Rules, 2024: Labelling, Form Revisions and New Form MD-44",
+    title: "gsr-883e-20251204-draft.pdf",
     keywords: "NSNM",
   },
   {
@@ -158,8 +156,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "draft",
-    title:
-      "Medical Devices (Amendment) Rules, 2024: Inspector and Government Analyst Qualifications",
+    title: "gsr-748e-20251010-draft.pdf",
     keywords: "G.S.R. 165(E) Medical Devices (Amendment) Rules, 2026",
   },
   {
@@ -169,7 +166,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "final",
-    title: "Medical Device Testing Officers: Revised Designations by Device Category",
+    title: "so-5331e-20241210.pdf",
   },
   {
     id: "so-5330e-20241210",
@@ -178,8 +175,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "final",
-    title:
-      "Central Medical Device Testing Laboratories: Scope Extended to Gloves and Other Devices",
+    title: "so-5330e-20241210.pdf",
   },
   {
     id: "gsr-409e-20230602",
@@ -188,7 +184,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "final",
-    title: "Medical Devices (Amendment) Rules, 2023: State Medical Devices Testing Laboratories",
+    title: "gsr-409e-20230602.pdf",
   },
   {
     id: "gsr-157e-20230301-draft",
@@ -197,7 +193,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "draft",
-    title: "Medical Devices (Amendment) Rules, 2023: State Medical Devices Testing Laboratories",
+    title: "gsr-157e-20230301-draft.pdf",
     keywords: "G.S.R. 409(E)",
   },
   {
@@ -207,8 +203,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "final",
-    title:
-      "Medical Devices (Sixth Amendment) Rules, 2022: Class A Non-Sterile Non-Measuring Registration",
+    title: "gsr-777e-20221014.pdf",
     keywords: "NSNM",
   },
   {
@@ -218,8 +213,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "final",
-    title:
-      "Medical Devices (Fifth Amendment) Rules, 2022: Registration Certificate for Sale (MD-42)",
+    title: "gsr-754e-20220930.pdf",
   },
   {
     id: "so-4574e-20220928",
@@ -228,7 +222,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "final",
-    title: "Medical Device Testing Officers: Chandigarh Laboratory Analysts Added",
+    title: "so-4574e-20220928.pdf",
   },
   {
     id: "so-4573e-20220928",
@@ -237,7 +231,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "final",
-    title: "Central Medical Device Testing Laboratories: Chandigarh Laboratory Added",
+    title: "so-4573e-20220928.pdf",
   },
   {
     id: "gsr-710e-20220920-draft",
@@ -246,8 +240,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "draft",
-    title:
-      "Medical Devices (Amendment) Rules, 2022: Class A Non-Sterile/Non-Measuring Registration",
+    title: "gsr-710e-20220920-draft.pdf",
     keywords: "NSNM G.S.R. 777(E) Medical Devices (Sixth Amendment) Rules, 2022",
   },
   {
@@ -257,7 +250,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "final",
-    title: "Medical Device Testing Officers: Revised Designations",
+    title: "so-3739e-20220802.pdf",
   },
   {
     id: "gsr-450e-20220615",
@@ -266,7 +259,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "final",
-    title: "Medical Devices (Fourth Amendment) Rules, 2022: TSE/BSE Certificate Exemption",
+    title: "gsr-450e-20220615.pdf",
   },
   {
     id: "gsr-356e-20220518",
@@ -275,8 +268,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "final",
-    title:
-      "Medical Devices (Third Amendment) Rules, 2022: Import Licence Suspension and Cancellation",
+    title: "gsr-356e-20220518.pdf",
   },
   {
     id: "gsr-228e-20220329-draft",
@@ -285,7 +277,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "draft",
-    title: "Medical Devices (Amendment) Rules, 2022: TSE/BSE Certificate Exemption",
+    title: "gsr-228e-20220329-draft.pdf",
     keywords: "G.S.R. 450(E) Medical Devices (Fourth Amendment) Rules, 2022",
   },
   {
@@ -295,7 +287,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "final",
-    title: "Medical Devices (2nd Amendment) Rules, 2022: United Kingdom Added to Rule 36 Countries",
+    title: "gsr-174e-20220304.pdf",
     keywords: "free sale certificate",
   },
   {
@@ -305,7 +297,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "draft",
-    title: "Medical Devices (Amendment) Rules, 2022: Registration Certificate for Sale (MD-42)",
+    title: "gsr-104e-20220209-draft.pdf",
     keywords: "G.S.R. 754(E) Medical Devices (Fifth Amendment) Rules, 2022",
   },
   {
@@ -315,7 +307,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "draft",
-    title: "Medical Devices (Amendment) Rules, 2021: Import Licence Suspension and Cancellation",
+    title: "gsr-23e-20220118-draft.pdf",
     keywords: "G.S.R. 356(E) Medical Devices (Third Amendment) Rules, 2022",
   },
   {
@@ -325,7 +317,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "final",
-    title: "Medical Devices (Amendment) Rules, 2022: Provisional Registration Pending ISO 13485",
+    title: "gsr-19e-20220118.pdf",
   },
   {
     id: "gsr-918e-20211231",
@@ -334,7 +326,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "final",
-    title: "Medical Devices (Amendment) Rules, 2021: Unique Device Identification (Rule 46)",
+    title: "gsr-918e-20211231.pdf",
     keywords: "UDI",
   },
   {
@@ -344,7 +336,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "draft",
-    title: "Medical Devices (Amendment) Rules, 2021: Unique Device Identification (Rule 46)",
+    title: "so-877e-20211223-draft.pdf",
     keywords: "UDI G.S.R. 877(E) G.S.R. 918(E)",
   },
   {
@@ -354,7 +346,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "draft",
-    title: "Medical Devices (Amendment) Rules, 2021: United Kingdom Added to Rule 36 Countries",
+    title: "gsr-850e-20211210-draft.pdf",
     keywords: "free sale certificate G.S.R. 174(E) Medical Devices (2nd Amendment) Rules, 2022",
   },
   {
@@ -364,7 +356,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "draft",
-    title: "Medical Devices (Amendment) Rules, 2021: Provisional Registration Pending ISO 13485",
+    title: "gsr-729e-20211012-draft.pdf",
     keywords: "G.S.R. 19(E)",
   },
   {
@@ -374,7 +366,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "draft",
-    title: "Medical Devices (Amendment) Rules, 2021: ASTM Added to Product Standards (Rule 7)",
+    title: "gsr-98e-20210205-draft.pdf",
   },
   {
     id: "so-648e-20200211",
@@ -383,7 +375,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "final",
-    title: "Notification of All Medical Devices as Drugs",
+    title: "so-648e-20200211.pdf",
     keywords: "section 3(b)(iv)",
   },
   {
@@ -393,7 +385,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "final",
-    title: "Medical Devices (Amendment) Rules, 2020: Registration of Certain Medical Devices",
+    title: "gsr-102e-20200211.pdf",
   },
   {
     id: "gsr-797e-20191018-draft",
@@ -402,7 +394,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "draft",
-    title: "Medical Devices (Amendment) Rules, 2019: Registration of Certain Medical Devices",
+    title: "gsr-797e-20191018-draft.pdf",
     keywords: "G.S.R. 102(E) Medical Devices (Amendment) Rules, 2020",
   },
   {
@@ -412,8 +404,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "final",
-    title:
-      "Medical Devices (Fifth Amendment) Rules, 2019: Accreditation Exemption for Government Labs",
+    title: "gsr-787e-20191016.pdf",
     keywords: "NABL",
   },
   {
@@ -423,7 +414,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "final",
-    title: "Medical Devices (Fourth Amendment) Rules, 2019: Form MD-10 Issuing Authority",
+    title: "gsr-652e-20190913.pdf",
     keywords: "loan licence",
   },
   {
@@ -433,8 +424,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "final",
-    title:
-      "Medical Devices (Third Amendment) Rules, 2019: Export Certificates and Authority by Class",
+    title: "gsr-318e-20190418.pdf",
   },
   {
     id: "gsr-224e-20190318",
@@ -443,8 +433,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "final",
-    title:
-      "Medical Devices (Second Amendment) Rules, 2019: Condom and Dressing Manufacturing Areas",
+    title: "gsr-224e-20190318.pdf",
   },
   {
     id: "gsr-188e-20190306-draft",
@@ -453,7 +442,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "draft",
-    title: "Medical Devices (Amendment) Rules, 2019: Form MD-10 Issuing Authority",
+    title: "gsr-188e-20190306-draft.pdf",
     keywords: "loan licence G.S.R. 652(E) Medical Devices (Fourth Amendment) Rules, 2019",
   },
   {
@@ -463,7 +452,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "final",
-    title: "Implantable Devices, CT, MRI, PET, X-Ray and Other Equipment Notified as Drugs",
+    title: "so-775e-20190208.pdf",
   },
   {
     id: "gsr-87e-20190204-draft",
@@ -472,7 +461,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "draft",
-    title: "Medical Devices (Amendment) Rules, 2018: Accreditation Exemption for Government Labs",
+    title: "gsr-87e-20190204-draft.pdf",
     keywords: "NABL G.S.R. 787(E) Medical Devices (Fifth Amendment) Rules, 2019",
   },
   {
@@ -482,7 +471,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "final",
-    title: "Medical Devices (Amendment) Rules, 2019: Electronic Instructions for Use",
+    title: "gsr-30e-20190115.pdf",
     keywords: "eIFU",
   },
   {
@@ -492,7 +481,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "draft",
-    title: "Medical Devices (Amendment) Rules, 2018: Export Certificates and Authority by Class",
+    title: "gsr-1187e-20181207-draft.pdf",
     keywords: "G.S.R. 318(E) Medical Devices (Third Amendment) Rules, 2019",
   },
   {
@@ -502,8 +491,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "final",
-    title:
-      "Nebulizers, Blood Pressure Monitors, Digital Thermometers, Glucometers Notified as Drugs",
+    title: "so-5980e-20181203.pdf",
     keywords: "nebuliser BP monitor",
   },
   {
@@ -513,7 +501,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "draft",
-    title: "Medical Devices (Amendment) Rules, 2018: Electronic Instructions for Use",
+    title: "gsr-848e-20180907-draft.pdf",
     keywords: "eIFU G.S.R. 30(E) Medical Devices (Amendment) Rules, 2019",
   },
   {
@@ -523,7 +511,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "final",
-    title: "Medical Devices (Amendment) Rules, 2018: IVD Performance Evaluation Reports",
+    title: "gsr-729e-20180801.pdf",
     keywords: "IVD",
   },
   {
@@ -533,7 +521,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "draft",
-    title: "Medical Devices (Amendment) Rules, 2018: Condom and Dressing Manufacturing Areas",
+    title: "gsr-660e-20180719-draft.pdf",
     keywords: "G.S.R. 224(E) Medical Devices (Second Amendment) Rules, 2019",
   },
   {
@@ -543,7 +531,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "final",
-    title: "Designation of Medical Device Testing Officers",
+    title: "so-3400e-20180711.pdf",
   },
   {
     id: "so-2237e-20180601",
@@ -552,7 +540,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "final",
-    title: "Designation of Central Medical Device Testing Laboratories",
+    title: "so-2237e-20180601.pdf",
     keywords: "CMDTL",
   },
   {
@@ -562,7 +550,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "draft",
-    title: "Medical Devices (Amendment) Rules, 2018: IVD Performance Evaluation Reports",
+    title: "gsr-412e-20180427-draft.pdf",
     keywords: "G.S.R. 729(E) IVD",
   },
   {
@@ -572,7 +560,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "final",
-    title: "Designation of CDSCO Inspectors as Medical Device Officers",
+    title: "gsr-76e-20180209.pdf",
   },
   {
     id: "gsr-78e-20170131",
@@ -581,7 +569,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "final",
-    title: "Medical Devices Rules, 2017: Principal Rules as Notified",
+    title: "gsr-78e-20170131.pdf",
     keywords: "MDR 2017",
   },
   {
@@ -591,8 +579,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "final",
-    title:
-      "Drugs and Cosmetics (Fourth Amendment) Rules, 2016: Schedule M-III Quality Management System",
+    title: "gsr-640e-20160629.pdf",
     keywords: "Schedule M3 QMS",
   },
   {
@@ -600,14 +587,14 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "checklist",
     status: "final",
-    title: "Clinical Investigation Permission (MD-22/MD-23): Application Checklist",
+    title: "checklist-checklist-for-form-md-22md.pdf",
   },
   {
     id: "guidance-chapter-30-2026htsrev19",
     category: "general",
     kind: "reference",
     status: "final",
-    title: "US Harmonized Tariff Schedule 2026 (Revision 19): Chapter 30, Pharmaceutical Products",
+    title: "guidance-chapter-30-2026htsrev19.pdf",
     keywords: "HTSUS HS code",
   },
   {
@@ -615,7 +602,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "guidance",
     status: "final",
-    title: "Good Clinical Practice Guidelines for Clinical Research in India",
+    title: "guidance-clinicalgcpguide.pdf",
     keywords: "Indian GCP",
   },
   {
@@ -623,7 +610,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "guidance",
     status: "draft",
-    title: "Good Distribution Practices for Pharmaceutical Products: Guidelines",
+    title: "guidance-draft-gdp-guidance-document.pdf",
   },
 ];
 

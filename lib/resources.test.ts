@@ -122,6 +122,11 @@ test("the catalog: ids are unique and safe to use as URL slugs", () => {
   for (const id of ids) assert.match(id, /^[a-z0-9]+(?:-[a-z0-9]+)*$/);
 });
 
+test("the catalog: every document is listed under its file name", () => {
+  // The owner's decision: no drafted titles. A document's name is the PDF's name.
+  for (const r of RESOURCES) assert.equal(r.title, `${r.id}.pdf`);
+});
+
 test("the catalog: every document page gets a different title", () => {
   const titles = RESOURCES.map(pageTitle);
   assert.equal(new Set(titles).size, titles.length);

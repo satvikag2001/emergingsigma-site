@@ -40,8 +40,11 @@ total, 1 to 250 pages each.
   original document.
 - PDFs are shown in a **viewer embedded in the site** (PDF.js), opened at the matching page
   with the search term highlighted.
-- Titles are **hand-written**: Claude drafts all 57 from the documents, and the owner reviews
-  them before release.
+- **Documents are listed under their file names** (`gsr-78e-20170131.pdf`), with the gazette
+  number, date and type beside them. The owner decided this on 2026-11-23, to release
+  without reviewing titles. The 57 titles Claude had drafted are not on the site; they are
+  kept in `tasks/review.md` in case the owner wants to use them later. A title is used only
+  if the owner supplies or approves it.
 - **No one-line summaries.** If a summary or any other descriptive text turns out to be needed
   anywhere, its wording is approved by the owner before it is used.
 - **Search is exhaustive.** Any word can be searched (no stop-word list, no fixed vocabulary),
@@ -270,7 +273,7 @@ export const RESOURCES: Resource[] = [
     category: "cdsco",
     kind: "notification",
     status: "final",
-    title: "Medical Devices Rules, 2017",
+    title: "gsr-78e-20170131.pdf",
     keywords: "MDR 2017 CDSCO licensing classification",
   },
   // …
@@ -326,8 +329,9 @@ Conventions:
 - Any dependency other than `pdfjs-dist`.
 - Changes to `.github/workflows/deploy.yml`.
 - Changes to the nav, footer or any page other than `/resources` and the sitemap.
-- Publishing the drafted titles, the meta description template, and any other new visible
-  wording (owner reviews them first).
+- Giving a document a title other than its file name, and any change to visible wording.
+  (The wording the library added was released as drafted on the owner's instruction of
+  2026-11-23; it is listed in `tasks/review.md` and can be changed at any time.)
 - Adding a summary or other descriptive text to any document.
 - Deleting `documents.zip` (adding it to `.gitignore` is already approved).
 - The empty-state wording shown for filters with no documents.

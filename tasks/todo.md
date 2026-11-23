@@ -44,29 +44,20 @@ below is the order to do them in.
     and zoom controls work; any Safari-only defect is fixed or recorded.
   - Depends on: Task 7 (it needs the live site). Scope: XS.
 
-- [ ] **Task 2 (owner): The owner reviews the 57 titles**
-  - The list is ready: [review.md](review.md), section 1 (items T1 to T57). Waiting for the
-    owner's reply; then apply the changes to `lib/resources.ts`.
-  - Done when: every title is approved or replaced; each flagged item has a decision; every
-    document page still has a unique title.
-  - Verify: `npm test`, `npm run build`, look at `/resources`.
-  - Depends on: owner input. Scope: Small.
+- [x] **Task 2: Titles**
+  - Decided by the owner on 2026-11-23: no drafted titles. Every document is listed under
+    its file name (`gsr-78e-20170131.pdf`); a test checks this. The 57 drafts stay in
+    [review.md](review.md), section 1, unused, in case they are wanted later.
 
-- [ ] **Task 3 (owner): The owner reviews the new wording**
-  - The list is ready: [review.md](review.md), section 2 (items W1 to W27): filter labels,
-    empty-filter message, search status lines, headings, buttons, viewer labels and
-    messages, and the page title and description templates. Waiting for the owner's reply.
-  - Done when: each string and both templates are approved or replaced; no draft string
-    remains; tests that assert wording match.
-  - Verify: `npm test`, `npm run build`, browser checks.
-  - Depends on: owner input. Scope: Medium.
+- [x] **Task 3: New wording**
+  - Released as drafted on the owner's instruction of 2026-11-23 to publish right away.
+    The 27 items are listed in [review.md](review.md), section 2; any of them can be changed
+    later.
 
-- [ ] **Task 4 (owner): Decide two existing texts that now read slightly off**
-  - In [review.md](review.md), section 3 (items E1 and E2): the search placeholder
-    ("…by title or keyword…") and the column heading "Title / Description".
-  - Done when: the owner has chosen keep or change for each; the page shows the chosen text.
-  - Verify: `npm run build`, look at `/resources` at desktop width and 375 px.
-  - Depends on: owner input. Scope: XS.
+- [x] **Task 4: Two existing texts that now read slightly off**
+  - Left as the owner wrote them (the search placeholder and the "Title / Description"
+    column heading). Listed in [review.md](review.md), section 3, if the owner wants to
+    change them later.
 
 - [x] **Task 6: Bring DEPLOY.md's "Known gaps" up to date**
   - Done 2026-11-23. Removed the "12 download buttons link to #" item and the two "secret is
