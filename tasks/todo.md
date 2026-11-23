@@ -37,8 +37,8 @@ below is the order to do them in.
     browsers get the message and the link to the PDF.
 
 - [ ] **Task 1b (owner, after release): Check the viewer in Safari**
-  - Decided 2026-11-23: the owner checks on an Apple device after the release, as part of
-    Task 8. (WebKit cannot start here without system libraries that need `sudo`.)
+  - The library is live, so this can be done now. Decided 2026-11-23: the owner checks on an
+    Apple device. (WebKit cannot start here without system libraries that need `sudo`.)
   - Open a document page from a search result on an iPhone, iPad or Mac.
   - Done when: the PDF opens at the right page with the match highlighted, and find, page
     and zoom controls work; any Safari-only defect is fixed or recorded.
@@ -75,38 +75,46 @@ below is the order to do them in.
 ### Checkpoint A: Ready to release
 
 - [x] Task 10 released
-- [ ] Tasks 1 to 6 done and committed on `document-library`; working tree clean (Tasks 2, 3
-      and 4 are waiting for the owner's review)
-- [ ] `npm test` passes; `npm run build` succeeds
-- [ ] Browser checks pass in Chromium and Firefox (Safari: the owner checks after release)
-- [ ] The owner has approved the titles and all wording
-- [ ] Lighthouse accessibility rerun if Tasks 2 to 4 changed anything visible (still 95+)
-- [ ] The owner gives explicit sign-off to deploy
+- [x] Tasks 1 to 6 done and committed; working tree clean
+- [x] `npm test` passes (47 tests); `npm run build` succeeds, also from a fresh clone
+- [x] Browser checks pass in Chromium and Firefox (Safari: the owner checks after release)
+- [x] Titles and wording settled by the owner's decisions of 2026-11-23
+- [x] Lighthouse accessibility rerun after the titles changed: still 95 on both pages
+- [x] The owner's sign-off to deploy ("publish ... right now", 2026-11-23)
 
 ## Phase 2: Release
 
-- [ ] **Task 7: Merge to `main` and push (this deploys the site)**
-  - Fast-forward `main` to `document-library`; push; watch the Actions run.
-  - Done when: the run finishes green, including its build-output check.
-  - Rollback: `git revert` the release commits on `main` and push.
-  - Depends on: Checkpoint A and the owner's explicit sign-off. Scope: XS, high risk.
+- [x] **Task 7: Merge to `main` and push (this deploys the site)**
+  - Done 2026-11-23: `main` fast-forwarded to `13a351d` and pushed. The Actions run finished
+    green, including its build-output check.
+  - Rollback, if ever needed: `git revert` the release commits on `main` and push. The PDFs
+    stay in the repository's history either way.
 
-- [ ] **Task 8: Verify the live site**
-  - Done when: `/resources` lists 57 documents and search works; a result opens the right
-    page with highlights; `/resources` still loads beside the new `resources/` folder; a PDF
-    matches its checksum; page 200 of the rules appears within 3 s; the owner has checked on
-    a phone.
-  - Verify: scripted read-only checks against the live URLs; the owner's phone; the sitemap.
-  - Depends on: Task 7. Scope: Small.
+- [x] **Task 8: Verify the live site**
+  - Done 2026-11-23, in Chromium and Firefox with analytics blocked:
+    - `/resources` loads with no redirect beside the new `resources/` folder and lists 57
+      documents under their file names; an unknown document id returns the 404 page.
+    - Searching `Form MD-14` gives "20 matches on 4 pages in 3 documents"; a result opens the
+      document at page 152 with the match highlighted on the right word; Back restores the
+      search.
+    - All 57 live PDFs are byte-identical to `documents.zip`; PDFs support partial loading.
+    - The search text transfers at 252 KB compressed and is fetched only when someone
+      searches. The library makes no new third-party requests.
+    - Page 200 of the 250-page rules appears in 1.2 s from an empty cache.
+    - The sitemap lists the 57 document pages; the 13 other pages are unchanged.
+  - Left for the owner: a look on a phone, and Safari (Task 1b).
 
 ### Checkpoint B: Live and verified
 
-- [ ] Task 8 passes, or each failure is fixed or rolled back
+- [x] Task 8 passes
 - [ ] The owner has seen the live library
 
 ## Phase 3: After release
 
 - [ ] **Task 9: After release**
-  - Mark SPEC.md as released; delete the merged branch; the owner resubmits the sitemap in
-    Search Console.
-  - Depends on: Checkpoint B. Scope: XS.
+  - [x] SPEC.md marked as released.
+  - [x] Merged branches deleted (`document-library`, `next-security-upgrade`).
+  - [ ] The owner resubmits the sitemap in Google Search Console, so the 57 new pages are
+        picked up sooner (optional).
+  - [ ] This bookkeeping commit is on local `main`, not pushed. It changes nothing on the
+        site; it goes out with the next push.

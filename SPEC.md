@@ -1,8 +1,8 @@
 # Spec: Regulatory Document Library — V1
 
-Status: approved by the owner and implemented on 2026-11-22, on the branch
-`document-library`. Not merged to `main` or deployed: the drafted titles and new wording
-await the owner's review (see "Ask first").
+Status: released. Approved by the owner, implemented on 2026-11-22, and live on
+emergingsigma.com since 2026-11-23 (`13a351d` on `main`). Documents are listed under their
+file names by the owner's decision. Still open: the owner's check in Safari.
 
 ## Objective
 

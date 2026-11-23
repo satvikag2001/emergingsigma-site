@@ -8,9 +8,9 @@ Written 2026-11-22. Task list: [todo.md](todo.md).
 
 The document library in SPEC.md is built: `/resources` lists the 57 PDFs with category and
 type filters, full-text search shows every occurrence, and each document has a page with a
-PDF viewer. The work sits on the local branch `document-library` (three commits). `main` is
-unchanged by the library and none of the library is deployed. The branch sits on top of the
-Next.js upgrade from Task 10, which went live on its own on 2026-11-23.
+PDF viewer. It was released on 2026-11-23: the Next.js upgrade from Task 10 went out first,
+on its own, and the library followed the same day (`13a351d` on `main`). What is left is the
+owner's own look at the live site, including Safari. The task list has the current state.
 
 This plan covers what is left between "built on a branch" and "live and verified". Most of
 it is not coding. It is a Next.js security upgrade the owner wants done first, one technical
@@ -467,7 +467,8 @@ replaced them, and an end-to-end test framework.
 - **Titles (2026-11-23):** none of the drafts. Documents are listed under their file names,
   with no notes and no summaries. This closes Task 2.
 - **Release (2026-11-23):** publish right away. The new wording goes out as drafted (Task 3)
-  and the two existing texts stay as they are (Task 4); both can be revisited later.
+  and the two existing texts stay as they are (Task 4); both can be revisited later. Done
+  the same day: Tasks 7 and 8 in `tasks/todo.md` record the push and the live checks.
 
 ## Open questions
 
