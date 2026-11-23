@@ -58,6 +58,9 @@ total, 1 to 250 pages each.
   text is still visible in the viewer.
 - **`documents.zip` is added to `.gitignore`** once the PDFs are in `public/docs/`. The local
   copy is kept.
+- **The viewer needs a browser from about mid-2024 on** (Chrome or Edge 125+, Safari 18+, a
+  current Firefox), which is as far back as PDF.js goes. Older browsers get a message and
+  the link to the PDF. Accepted by the owner on 2026-11-23.
 
 ### Assumptions (correct any of these before approval)
 

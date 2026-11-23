@@ -9,8 +9,8 @@ Written 2026-11-22. Task list: [todo.md](todo.md).
 The document library in SPEC.md is built: `/resources` lists the 57 PDFs with category and
 type filters, full-text search shows every occurrence, and each document has a page with a
 PDF viewer. The work sits on the local branch `document-library` (three commits). `main` is
-untouched and nothing is deployed. Since 2026-11-22 the branch sits on top of
-`next-security-upgrade`, the Next.js upgrade from Task 10.
+unchanged by the library and none of the library is deployed. The branch sits on top of the
+Next.js upgrade from Task 10, which went live on its own on 2026-11-23.
 
 This plan covers what is left between "built on a branch" and "live and verified". Most of
 it is not coding. It is a Next.js security upgrade the owner wants done first, one technical
@@ -74,12 +74,11 @@ owner has accepted.
 Built and committed on document-library
 (catalog + PDFs -> build checks + index -> search UI -> document pages + viewer -> tests)
         |
-        T10 Next.js security upgrade ............. first: own branch off main, own deploy
-        |                                          (the push needs sign-off), then the
-        |                                          library branch is rebased on top
+        T10 Next.js security upgrade ............. done and live (2026-11-23); the library
+        |                                          branch sits on top of it
         |
         +-- T1  Viewer on older browsers ......... done
-        +-- T1b Safari check ..................... owner: sudo install, or an Apple device
+        +-- T1b Safari check ..................... owner, on an Apple device after release
         +-- T2  Owner reviews the 57 titles ...... owner
         +-- T3  Owner reviews the new wording .... owner
         +-- T4  Two existing texts ............... owner
@@ -116,11 +115,11 @@ verify it, and with the owner's sign-off push it to `main` as its own deploy. Th
 `node_modules/next/dist/docs/` first, as AGENTS.md requires.
 
 **Acceptance criteria:**
-- [ ] `package.json` pins `next` at the fixed version (16.4.6, or the latest 16.4 patch,
+- [x] `package.json` pins `next` at the fixed version (16.4.6, or the latest 16.4 patch,
       exact) and `npm audit` reports no critical advisory.
-- [ ] The site builds on the first attempt and every existing page behaves as before,
+- [x] The site builds on the first attempt and every existing page behaves as before,
       locally and, once the owner signs off on the push, on the live site.
-- [ ] `document-library` is rebased onto the upgraded `main`, and its tests, build and
+- [x] `document-library` is rebased onto the upgraded `main`, and its tests, build and
       browser checks still pass.
 
 **Verification:**
@@ -132,12 +131,13 @@ verify it, and with the owner's sign-off push it to `main` as its own deploy. Th
 
 **Rollback:** `git revert` the upgrade commit on `main` and push.
 
-**Progress (2026-11-22):** upgraded and verified on the branch `next-security-upgrade`
-(`8e4ac56`): `npm audit` reports no vulnerabilities, the build succeeds on the first
-attempt, and all 17 pages built from `main` are identical before and after in visible text,
-titles, descriptions, canonical URLs, structured data and links. `document-library` is
-rebased onto it and passes its tests, build and browser checks. Left: the owner's sign-off,
-the push to `main`, and the live check.
+**Status:** done and live on 2026-11-23 (`8e4ac56` on `main`, pushed with the owner's
+sign-off). Before the push: `npm audit` reported no vulnerabilities, the build succeeded on
+the first attempt, and all 17 pages built from `main` were identical before and after in
+visible text, titles, descriptions, canonical URLs, structured data and links. After it: the
+Actions deploy finished green, all 14 live pages are served from the new build with nothing
+visible changed, and live pages hydrate with no console errors. `document-library` sits on
+top of the new `main` and passes its tests, build and browser checks.
 
 **Dependencies:** None. Pushing to `main` needs the owner's explicit sign-off.
 
@@ -203,12 +203,12 @@ Mac. PDF.js lists Safari 18+ as "mostly" supported.
 - [ ] Any Safari-only defect is fixed or recorded in SPEC.md.
 
 **Verification:**
-- [ ] Either: `sudo ~/job_apps/.venv/bin/playwright install-deps webkit`, then the browser
-      checks in WebKit
-- [ ] Or: the owner's manual check on an Apple device (before release against a local
-      build on the same network, or right after release as part of Task 8)
+- [ ] The owner's manual check on an Apple device right after release, as part of Task 8
+      (decided 2026-11-23). The alternative, not chosen, was
+      `sudo ~/job_apps/.venv/bin/playwright install-deps webkit` and the browser checks in
+      WebKit here.
 
-**Dependencies:** Task 1; the owner's choice of route
+**Dependencies:** Task 7 (it needs the live site)
 
 **Files likely touched:** none unless a defect is found
 
@@ -344,10 +344,11 @@ three, and check the secrets with `gh secret list` while doing it.
 
 ### Checkpoint A: Ready to release
 
-- [ ] Task 10 is released, and Tasks 1 to 6 are done and committed on `document-library`;
-      the working tree is clean
+- [x] Task 10 is released
+- [ ] Tasks 1 to 6 are done and committed on `document-library`; the working tree is clean
+      (Tasks 2, 3 and 4 are waiting for the owner's review)
 - [ ] `npm test` passes and `npm run build` succeeds
-- [ ] Browser checks pass in Chromium and Firefox; Safari checked (Task 1b)
+- [ ] Browser checks pass in Chromium and Firefox (Safari: the owner checks after release)
 - [ ] The owner has approved the titles and all wording
 - [ ] Lighthouse accessibility rerun if Tasks 2 to 4 changed anything visible (still 95+)
 - [ ] The owner gives explicit sign-off to deploy
@@ -439,8 +440,8 @@ replaced them, and an end-to-end test framework.
 | Risk | Impact | Mitigation |
 |---|---|---|
 | The viewer fails on older browsers | High for those visitors: no in-page viewer | Task 1; the fallback link to the PDF already works |
-| Safari has not been tested | Medium | WebKit downloaded but cannot start here without system libraries that need `sudo`. Task 1b: the owner installs them, or checks on an Apple device; Task 8 includes a phone check in any case |
-| Visitors on browsers older than about mid-2024 get no in-page viewer | Medium | A limit of PDF.js itself, even in its legacy build. They get a message and the link to the PDF; search and the list still work. See Open Questions |
+| Safari is untested until after release | Medium | WebKit cannot start here without system libraries that need `sudo`. The owner checks on an Apple device right after release (Task 1b); a Safari-only defect would be fixed then, and Safari visitors always have the link to the PDF |
+| Visitors on browsers older than about mid-2024 get no in-page viewer | Medium, accepted by the owner | A limit of PDF.js itself, even in its legacy build. They get a message and the link to the PDF; search and the list still work |
 | Unreviewed titles or wording go live | High: the owner's site text | Work stays on a branch; Checkpoint A requires approval before Task 7 |
 | `/resources` breaks on GitHub Pages because a `resources/` folder now exists | High | The site already has `about/` beside `about.html` and works; Task 8 checks it first; rollback is one revert |
 | The first CI run of the new build script fails (Node version, new optional dependency) | Medium: the deploy fails, the live site stays as it was | Same Node major locally and in CI; a failed run leaves the site untouched |
@@ -459,14 +460,11 @@ replaced them, and an end-to-end test framework.
 - **Viewer build:** switch to PDF.js's legacy build.
 - **This plan:** approved for an autonomous build. Pushes to `main` still need explicit
   sign-off each time.
+- **Next.js upgrade (2026-11-23):** signed off and pushed.
+- **Safari (2026-11-23):** the owner checks on an Apple device after the release.
+- **Viewer on older browsers (2026-11-23):** accepted. The viewer needs Chrome or Edge 125+,
+  Safari 18+ or a current Firefox; older browsers get the link to the PDF.
 
 ## Open questions
 
 1. **Titles and wording.** Tasks 2, 3 and 4 wait on the owner's review (`tasks/review.md`).
-2. **Safari (Task 1b).** Install WebKit's system libraries with `sudo`, or check on an Apple
-   device?
-3. **Viewer on older browsers.** The viewer needs Chrome or Edge 125+, Safari 18+ or a
-   current Firefox. Accept that, or investigate an older PDF.js release whose legacy build
-   reaches further back? That would be a larger change: a different major version, with
-   everything in the viewer verified again.
-4. **Sign-off to push the Next.js upgrade to `main` (Task 10).**

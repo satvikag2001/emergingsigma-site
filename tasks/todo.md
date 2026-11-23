@@ -16,22 +16,14 @@ below is the order to do them in.
 
 ## Phase 0: Before anything else
 
-- [ ] **Task 10: Upgrade Next.js 16.4.0 to 16.4.6 for the security advisory, released on its own**
-  - The owner chose to do this before the library release. Branch from `main`, upgrade,
-    verify, then push to `main` as its own deploy and rebase `document-library` on top.
-  - Done when: `next` is pinned at the fixed version and `npm audit` shows no critical
-    advisory; the site builds on the first attempt and every existing page behaves as before,
-    locally and live; `document-library` is rebased and its tests, build and browser checks
-    pass.
-  - Verify: `npm run build` on the first attempt; browser check of every existing page; green
-    Actions run; after the rebase, `npm test`, `npm run build` and the library browser checks.
-  - Rollback: `git revert` the upgrade commit on `main` and push.
-  - Depends on: nothing to start. **The push to `main` needs the owner's explicit sign-off.**
-    Scope: Small.
-  - Progress (2026-11-22): upgraded and verified on the branch `next-security-upgrade`
-    (`8e4ac56`, one commit ahead of `main`), and `document-library` is rebased onto it with
-    tests, build and browser checks passing. **Left: the owner's sign-off, then push
-    `next-security-upgrade` to `main` and check the live site.**
+- [x] **Task 10: Upgrade Next.js 16.4.0 to 16.4.6 for the security advisory, released on its own**
+  - Done and live on 2026-11-23 (`8e4ac56` on `main`, pushed with the owner's sign-off).
+    `npm audit` reports no vulnerabilities and the build succeeds on the first attempt.
+  - Verified: the Actions deploy finished green; all 14 live pages are served from the new
+    build and are identical to before in visible text, titles, descriptions, canonical URLs
+    and links; live pages hydrate with no console errors.
+  - `document-library` sits on top of the new `main`. Rollback, if ever needed:
+    `git revert 8e4ac56` on `main` and push.
 
 ## Phase 1: Finish before release
 
@@ -44,14 +36,13 @@ below is the order to do them in.
     Firefox ESR (about mid-2024), which is newer than the rest of the site needs. Older
     browsers get the message and the link to the PDF.
 
-- [ ] **Task 1b (owner): Check the viewer in Safari**
-  - WebKit is downloaded but cannot start here without system libraries that need `sudo`.
-  - Either run `sudo ~/job_apps/.venv/bin/playwright install-deps webkit` so the browser
-    checks can run in WebKit, or open a document page from a search result on an iPhone,
-    iPad or Mac.
+- [ ] **Task 1b (owner, after release): Check the viewer in Safari**
+  - Decided 2026-11-23: the owner checks on an Apple device after the release, as part of
+    Task 8. (WebKit cannot start here without system libraries that need `sudo`.)
+  - Open a document page from a search result on an iPhone, iPad or Mac.
   - Done when: the PDF opens at the right page with the match highlighted, and find, page
     and zoom controls work; any Safari-only defect is fixed or recorded.
-  - Depends on: Task 1 and the owner's choice of route. Scope: XS.
+  - Depends on: Task 7 (it needs the live site). Scope: XS.
 
 - [ ] **Task 2 (owner): The owner reviews the 57 titles**
   - The list is ready: [review.md](review.md), section 1 (items T1 to T57). Waiting for the
@@ -92,10 +83,11 @@ below is the order to do them in.
 
 ### Checkpoint A: Ready to release
 
-- [ ] Task 10 released; Tasks 1 to 6 done and committed on `document-library`; working tree
-      clean
+- [x] Task 10 released
+- [ ] Tasks 1 to 6 done and committed on `document-library`; working tree clean (Tasks 2, 3
+      and 4 are waiting for the owner's review)
 - [ ] `npm test` passes; `npm run build` succeeds
-- [ ] Browser checks pass in Chromium and Firefox; Safari checked (Task 1b)
+- [ ] Browser checks pass in Chromium and Firefox (Safari: the owner checks after release)
 - [ ] The owner has approved the titles and all wording
 - [ ] Lighthouse accessibility rerun if Tasks 2 to 4 changed anything visible (still 95+)
 - [ ] The owner gives explicit sign-off to deploy
