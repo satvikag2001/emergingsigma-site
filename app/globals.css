@@ -273,8 +273,27 @@ p{color:var(--gray5);line-height:1.8;font-size:15px}
 @media not (forced-colors:active){
   .pdfv .textLayer .highlight{--highlight-bg-color:rgb(255 200 0 / .4);--highlight-selected-bg-color:rgb(13 82 70 / .4)}
 }
+/* Filter headings. A wide screen shows the plain heading with every option under
+   it. A one-column screen swaps the heading for a button that shows the current
+   choice and opens its group, and the box scrolls away with the page: pinned and
+   open, it covered most of a phone screen. */
+.res-toggle{display:none}
+@media(min-width:901px){
+  /* A short window: let the pinned sidebar scroll instead of running off screen. */
+  .res-sidebar{max-height:calc(100vh - 106px);max-height:calc(100dvh - 106px);overflow-y:auto}
+}
 @media(max-width:900px){
-  .res-filter-group{display:flex;flex-wrap:wrap;gap:6px;padding:10px 12px}
+  .res-sidebar{position:static}
+  .res-sidebar-title{display:none}
+  .res-toggle{display:flex;align-items:center;gap:12px;width:100%;min-height:46px;border:none;text-align:left;cursor:pointer;font-family:'Open Sans',sans-serif}
+  .res-filter-group~.res-toggle{border-top:1px solid rgba(255,255,255,.22)}
+  .res-toggle>span:first-child{flex:none}
+  .res-toggle-value{margin-left:auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12.5px;font-weight:600;letter-spacing:0;text-transform:none}
+  .res-toggle::after{content:"";flex:none;width:7px;height:7px;margin-top:-4px;border-right:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(45deg)}
+  .res-toggle[aria-expanded="true"]::after{margin-top:4px;transform:rotate(225deg)}
+  .res-toggle:focus-visible{outline:2px solid #fff;outline-offset:-4px}
+  .res-filter-group{display:none}
+  .res-filter-group.open{display:flex;flex-wrap:wrap;gap:6px;padding:10px 12px}
   .res-filter,.res-filter:last-child{width:auto;gap:8px;padding:6px 12px;border:1px solid var(--border);border-radius:100px}
 }
 @media(max-width:600px){

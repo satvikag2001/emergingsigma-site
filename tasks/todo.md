@@ -118,3 +118,16 @@ below is the order to do them in.
         picked up sooner (optional).
   - [ ] This bookkeeping commit is on local `main`, not pushed. It changes nothing on the
         site; it goes out with the next push.
+
+- [x] **Task 11: Filters closed on phones until used** (owner's request, 2026-11-23)
+  - The owner's report: on Android the filters took up most of the screen and did not
+    move. Reproduced at 360x740: the box was 512px tall and stayed pinned while scrolling.
+  - [x] One column (900px or less): each group is closed behind its heading, which shows
+        the current choice; tapping opens it, choosing an option closes it; the box is no
+        longer pinned. Closed, it is 94px tall.
+  - [x] Wider screens unchanged, except that the pinned sidebar now scrolls when the window
+        is too short to show all 12 options (the last ones could not be reached before).
+  - [x] No new wording: headings and choices are the existing labels.
+  - [x] Verified: 47 unit tests; build; 29 new browser checks and the 31 library checks in
+        Chromium and Firefox; Lighthouse accessibility still 95 on `/resources`.
+  - [ ] Pushed to `main` (needs the owner's go-ahead), then checked on the live site.

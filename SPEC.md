@@ -172,9 +172,17 @@ slug, so the original file is `/docs/<id>.pdf` and its page is `/resources/<id>`
   - **Type** (new): All types (57), Final notifications (32), Draft notifications (20),
     Guidance & circulars (3), Checklists (1), Reference (1).
 
-  Every option is always shown, including those with no documents. Counts come from the
+  Every option is always offered, including those with no documents. Counts come from the
   catalog and reflect the other group's current selection. Choosing an option with no
   matches shows an empty-state message (wording reviewed by the owner).
+
+  On a one-column screen (900px wide or less: phones, upright tablets) each group stays
+  closed behind its heading until it is used. The heading is a button that shows the
+  current choice; tapping it opens the options, and choosing one closes them again. The
+  filter box scrolls away with the page there. On wider screens the sidebar is as before:
+  every option visible, pinned beside the list, and scrollable when the window is too
+  short to show it all. No wording was added: the headings and choices are the existing
+  labels.
 - **A3.** The existing page heading, intro text and meta description stay as they are, since
   the category filters still cover CDSCO, EU MDR/IVDR, US FDA and ISO. Any copy change is
   proposed to the owner first.
@@ -414,3 +422,9 @@ Resolved with the owner on 2026-11-22:
 4. **`documents.zip`:** added to `.gitignore` after import; the local copy is kept.
 5. **No one-line summaries;** any descriptive text needs the owner's approval first.
 6. **Exhaustive search:** any word, every occurrence shown. Spelling and intent are V2.
+
+Resolved with the owner on 2026-11-23, after release:
+
+7. **Filters on phones (A2):** the owner found on an Android phone that the filters filled
+   most of the screen and stayed there while the list scrolled (the box was pinned, and
+   all 12 options were open). They asked for the filters to be collapsed when not in use.

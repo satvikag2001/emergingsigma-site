@@ -181,6 +181,79 @@ function renderHits(
   return { nodes, left, hidden };
 }
 
+type FilterGroupProps<T extends string> = {
+  name: string;
+  title: string;
+  options: readonly { id: T; label: string }[];
+  value: T;
+  counts: Record<T, number>;
+  onChange: (id: T) => void;
+};
+
+/**
+ * One group of filters. On a wide screen it is a plain heading over options that
+ * are always shown. On a narrow one the heading is a button that shows the current
+ * choice and opens the options; choosing one closes them again, the way a select
+ * does, so the filters stay out of the way until they are used. CSS picks which
+ * heading is shown, so nothing here has to measure the screen.
+ */
+function FilterGroup<T extends string>({
+  name,
+  title,
+  options,
+  value,
+  counts,
+  onChange,
+}: FilterGroupProps<T>) {
+  const [open, setOpen] = useState(false);
+  const toggle = useRef<HTMLButtonElement>(null);
+  const titleId = `res-${name}-title`;
+  const groupId = `res-${name}-group`;
+  return (
+    <>
+      <div className="res-sidebar-title" id={titleId}>
+        {title}
+      </div>
+      <button
+        ref={toggle}
+        type="button"
+        className="res-sidebar-title res-toggle"
+        aria-expanded={open}
+        aria-controls={groupId}
+        onClick={() => setOpen((o) => !o)}
+      >
+        <span>{title}</span>
+        <span className="res-toggle-value">{options.find((o) => o.id === value)?.label}</span>
+      </button>
+      <div
+        id={groupId}
+        className={`res-filter-group${open ? " open" : ""}`}
+        role="group"
+        aria-labelledby={titleId}
+      >
+        {options.map((o) => (
+          <button
+            key={o.id}
+            type="button"
+            className={`res-filter${value === o.id ? " active" : ""}`}
+            aria-pressed={value === o.id}
+            onClick={() => {
+              onChange(o.id);
+              if (open) {
+                setOpen(false);
+                // The option is about to be hidden; keep focus on something visible.
+                toggle.current?.focus();
+              }
+            }}
+          >
+            {o.label} <span className="cnt">{counts[o.id]}</span>
+          </button>
+        ))}
+      </div>
+    </>
+  );
+}
+
 /** Category and type filters, the document list, and full-text search over every page. */
 export default function ResourceLibrary() {
   const [category, setCategory] = useState<CategoryFilter>("all");
@@ -365,38 +438,22 @@ export default function ResourceLibrary() {
   return (
     <div className="res-layout">
       <div className="res-sidebar">
-        <div className="res-sidebar-title" id="res-cat-title">
-          Filter by Category
-        </div>
-        <div className="res-filter-group" role="group" aria-labelledby="res-cat-title">
-          {CATEGORIES.map((c) => (
-            <button
-              key={c.id}
-              type="button"
-              className={`res-filter${category === c.id ? " active" : ""}`}
-              aria-pressed={category === c.id}
-              onClick={() => setCategory(c.id)}
-            >
-              {c.label} <span className="cnt">{counts.categories[c.id]}</span>
-            </button>
-          ))}
-        </div>
-        <div className="res-sidebar-title" id="res-type-title">
-          Filter by Type
-        </div>
-        <div className="res-filter-group" role="group" aria-labelledby="res-type-title">
-          {TYPES.map((t) => (
-            <button
-              key={t.id}
-              type="button"
-              className={`res-filter${type === t.id ? " active" : ""}`}
-              aria-pressed={type === t.id}
-              onClick={() => setType(t.id)}
-            >
-              {t.label} <span className="cnt">{counts.types[t.id]}</span>
-            </button>
-          ))}
-        </div>
+        <FilterGroup
+          name="cat"
+          title="Filter by Category"
+          options={CATEGORIES}
+          value={category}
+          counts={counts.categories}
+          onChange={setCategory}
+        />
+        <FilterGroup
+          name="type"
+          title="Filter by Type"
+          options={TYPES}
+          value={type}
+          counts={counts.types}
+          onChange={setType}
+        />
       </div>
       <div className="res-main">
         <input
