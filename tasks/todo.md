@@ -35,14 +35,23 @@ below is the order to do them in.
 
 ## Phase 1: Finish before release
 
-- [ ] **Task 1: The PDF viewer works on the browsers the rest of the site supports**
-  - Switch the viewer to PDF.js's legacy build; run the browser checks in Chromium, Firefox
-    and WebKit (WebKit test browser download approved).
-  - Done when: viewer and worker load from `pdfjs-dist/legacy/`; all browser checks pass in
-    all three browsers, including highlight alignment; the fallback link shows when the
-    viewer cannot start.
-  - Verify: `npm test`, `npm run build`, browser checks against `out/`.
-  - Depends on: nothing (the owner agreed to the legacy build); best after Task 10. Scope: Small.
+- [x] **Task 1: The PDF viewer works on older browsers (PDF.js legacy build)**
+  - Done 2026-11-23. Viewer, stylesheet and worker load from `pdfjs-dist/legacy/`. A
+    simulated older browser failed before the switch and works after it; all 31 browser
+    checks pass in Chromium 148 and Firefox 150; the fallback link shows when the viewer
+    cannot start.
+  - Limit found: PDF.js supports its legacy build on Chrome and Edge 125+, Safari 18+ and
+    Firefox ESR (about mid-2024), which is newer than the rest of the site needs. Older
+    browsers get the message and the link to the PDF.
+
+- [ ] **Task 1b (owner): Check the viewer in Safari**
+  - WebKit is downloaded but cannot start here without system libraries that need `sudo`.
+  - Either run `sudo ~/job_apps/.venv/bin/playwright install-deps webkit` so the browser
+    checks can run in WebKit, or open a document page from a search result on an iPhone,
+    iPad or Mac.
+  - Done when: the PDF opens at the right page with the match highlighted, and find, page
+    and zoom controls work; any Safari-only defect is fixed or recorded.
+  - Depends on: Task 1 and the owner's choice of route. Scope: XS.
 
 - [ ] **Task 2 (owner): The owner reviews the 57 titles**
   - Give the owner a one-page list (number, date, title); apply the changes to
@@ -87,7 +96,7 @@ below is the order to do them in.
 - [ ] Task 10 released; Tasks 1 to 6 done and committed on `document-library`; working tree
       clean
 - [ ] `npm test` passes; `npm run build` succeeds
-- [ ] Browser checks pass in Chromium, Firefox and WebKit
+- [ ] Browser checks pass in Chromium and Firefox; Safari checked (Task 1b)
 - [ ] The owner has approved the titles and all wording
 - [ ] The owner gives explicit sign-off to deploy
 

@@ -39,23 +39,26 @@ Success criteria in SPEC.md:
   - 12 (deploy workflow checks): `CNAME` and `404.html` exist in the local build; the
     workflow itself only runs on a push to `main`.
 
-Two limits on that verification: it used one browser (Chrome 148), which Task 1 widens, and
-the browser checks live in a throwaway script outside the repo, which the owner has accepted.
+Two limits on that verification: it now covers Chromium 148 and Firefox 150 but not Safari
+(Task 1b), and the browser checks live in a throwaway script outside the repo, which the
+owner has accepted.
 
 ## Architecture decisions
 
 - **Release from a branch, by fast-forward.** `main` deploys on every push, so the work
   stays on `document-library` until the owner has approved the titles and wording. The
   merge is a fast-forward, which keeps the three commits as they are.
-- **Use PDF.js's legacy build in the browser (Task 1).** The viewer currently loads the
-  modern build, which relies on JavaScript features only very recent browsers have
-  (`Map.getOrInsertComputed`, `Math.sumPrecise`, `Promise.try`). The `legacy/` folder of the
-  same package is PDF.js's own answer for older browsers and bundles the polyfills. It is
-  about 60 KB larger and is still loaded only on document pages. The build script already
-  uses it for text extraction.
-- **Match the site's existing browser floor.** The rest of the site is compiled by Next.js
-  for Chrome, Edge and Firefox 111+ and Safari 16.4+. The viewer should work there too, or
-  fall back cleanly to the link to the original PDF.
+- **Use PDF.js's legacy build in the browser (Task 1, done).** The modern build relies on
+  JavaScript features only the latest browsers have (`Map.getOrInsertComputed`,
+  `Math.sumPrecise`, `Promise.try`); PDF.js supports it on the latest Chrome and Firefox
+  only. The `legacy/` folder of the same package bundles replacements for those features. It
+  is about 60 KB larger and is still loaded only on document pages.
+- **The viewer's floor is newer than the site's.** PDF.js supports its legacy build on
+  Chrome and Edge 125+, Safari 18+ ("mostly") and Firefox ESR: browsers from about mid-2024.
+  The rest of the site is compiled for Chrome, Edge and Firefox 111+ and Safari 16.4+ (early
+  2023). No build of this PDF.js version closes that gap, so on older browsers the document
+  page falls back to its message and the link to the PDF. Whether to accept that or look at
+  an older PDF.js is an open question below.
 - **Ship the Next.js security upgrade first, on its own (Task 10).** The owner chose to do it
   before the library release. It is unrelated to the library, so it goes out as its own
   change and its own deploy: if something breaks, the cause is obvious. It also removes the
@@ -75,7 +78,8 @@ Built and committed on document-library
         |                                          (the push needs sign-off), then the
         |                                          library branch is rebased on top
         |
-        +-- T1  Viewer on older browsers ......... ready (the owner agreed)
+        +-- T1  Viewer on older browsers ......... done
+        +-- T1b Safari check ..................... owner: sudo install, or an Apple device
         +-- T2  Owner reviews the 57 titles ...... owner
         +-- T3  Owner reviews the new wording .... owner
         +-- T4  Two existing texts ............... owner
@@ -150,15 +154,20 @@ and WebKit (the engine behind Safari; the owner approved downloading a test copy
 visitor on an older browser gets the "could not be shown here" message and a link to the PDF
 in place of the viewer; search and the document list are unaffected.
 
-**Status:** approved. The owner asked for the reasoning on 2026-11-22 and then agreed to
-the switch.
+**Status:** done on 2026-11-23, except the Safari check, which is now Task 1b. The viewer,
+its stylesheet and its worker load from `pdfjs-dist/legacy/`. Checked three ways: a
+simulated older browser (Chromium with the newer functions removed, on the page and inside
+the worker) could not start the viewer before the switch and opens and finds text after it;
+the served worker is the legacy file byte for byte; and all 31 browser checks pass in
+Chromium 148 and Firefox 150. WebKit downloaded but cannot start on this machine: it needs
+system libraries (GTK 4, GStreamer and others) that only `sudo` can install.
 
 **Acceptance criteria:**
-- [ ] The viewer and its worker load from `pdfjs-dist/legacy/`, still only on document pages
+- [x] The viewer and its worker load from `pdfjs-dist/legacy/`, still only on document pages
       and still with nothing from a CDN.
-- [ ] All browser checks pass in Chromium, Firefox and WebKit, including highlight alignment
-      (canvas and text layer have identical geometry).
-- [ ] When the viewer cannot start, the page shows the fallback message with a working link
+- [x] All browser checks pass in Chromium and Firefox, including highlight alignment
+      (canvas and text layer have identical geometry). WebKit moved to Task 1b.
+- [x] When the viewer cannot start, the page shows the fallback message with a working link
       to the original PDF (tested by blocking the worker file).
 
 **Verification:**
@@ -177,6 +186,32 @@ the switch.
 - `README.md`
 
 **Estimated scope:** Small
+
+### Task 1b: Check the viewer in Safari
+
+**Description:** Safari is the one major browser the viewer has not been run in. The WebKit
+test browser is downloaded, but it needs system libraries that only `sudo` can install on
+this machine. Either the owner installs them once, after which the browser checks can run in
+WebKit here, or the owner opens a document page from a search result on an iPhone, iPad or
+Mac. PDF.js lists Safari 18+ as "mostly" supported.
+
+**Acceptance criteria:**
+- [ ] On Safari or WebKit, a document page opened from a search result shows the PDF at the
+      right page with the match highlighted on the right word.
+- [ ] Find, next and previous match, page and zoom controls work.
+- [ ] Any Safari-only defect is fixed or recorded in SPEC.md.
+
+**Verification:**
+- [ ] Either: `sudo ~/job_apps/.venv/bin/playwright install-deps webkit`, then the browser
+      checks in WebKit
+- [ ] Or: the owner's manual check on an Apple device (before release against a local
+      build on the same network, or right after release as part of Task 8)
+
+**Dependencies:** Task 1; the owner's choice of route
+
+**Files likely touched:** none unless a defect is found
+
+**Estimated scope:** XS
 
 ### Task 2: The owner reviews the 57 titles
 
@@ -309,7 +344,7 @@ three, and check the secrets with `gh secret list` while doing it.
 - [ ] Task 10 is released, and Tasks 1 to 6 are done and committed on `document-library`;
       the working tree is clean
 - [ ] `npm test` passes and `npm run build` succeeds
-- [ ] Browser checks pass in Chromium, Firefox and WebKit
+- [ ] Browser checks pass in Chromium and Firefox; Safari checked (Task 1b)
 - [ ] The owner has approved the titles and all wording
 - [ ] The owner gives explicit sign-off to deploy
 
@@ -400,7 +435,8 @@ replaced them, and an end-to-end test framework.
 | Risk | Impact | Mitigation |
 |---|---|---|
 | The viewer fails on older browsers | High for those visitors: no in-page viewer | Task 1; the fallback link to the PDF already works |
-| Safari has not been tested yet | Medium | The owner approved a WebKit test browser and Task 1 runs the checks in it. WebKit on Linux is close to Safari but not identical, so Task 8 still includes a real iPhone if one is available |
+| Safari has not been tested | Medium | WebKit downloaded but cannot start here without system libraries that need `sudo`. Task 1b: the owner installs them, or checks on an Apple device; Task 8 includes a phone check in any case |
+| Visitors on browsers older than about mid-2024 get no in-page viewer | Medium | A limit of PDF.js itself, even in its legacy build. They get a message and the link to the PDF; search and the list still work. See Open Questions |
 | Unreviewed titles or wording go live | High: the owner's site text | Work stays on a branch; Checkpoint A requires approval before Task 7 |
 | `/resources` breaks on GitHub Pages because a `resources/` folder now exists | High | The site already has `about/` beside `about.html` and works; Task 8 checks it first; rollback is one revert |
 | The first CI run of the new build script fails (Node version, new optional dependency) | Medium: the deploy fails, the live site stays as it was | Same Node major locally and in CI; a failed run leaves the site untouched |
@@ -422,4 +458,11 @@ replaced them, and an end-to-end test framework.
 
 ## Open questions
 
-1. **Titles and wording.** Tasks 2, 3 and 4 wait on the owner's review.
+1. **Titles and wording.** Tasks 2, 3 and 4 wait on the owner's review (`tasks/review.md`).
+2. **Safari (Task 1b).** Install WebKit's system libraries with `sudo`, or check on an Apple
+   device?
+3. **Viewer on older browsers.** The viewer needs Chrome or Edge 125+, Safari 18+ or a
+   current Firefox. Accept that, or investigate an older PDF.js release whose legacy build
+   reaches further back? That would be a larger change: a different major version, with
+   everything in the viewer verified again.
+4. **Sign-off to push the Next.js upgrade to `main` (Task 10).**

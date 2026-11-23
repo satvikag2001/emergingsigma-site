@@ -1,8 +1,8 @@
 "use client";
 
-import "pdfjs-dist/web/pdf_viewer.css";
+import "pdfjs-dist/legacy/web/pdf_viewer.css";
 import { useCallback, useEffect, useRef, useState, type FormEvent } from "react";
-import type { EventBus, PDFViewer } from "pdfjs-dist/web/pdf_viewer.mjs";
+import type { EventBus, PDFViewer } from "pdfjs-dist/legacy/web/pdf_viewer.mjs";
 import { buildFragment, parseQuery, readFragment, viewerMatches } from "@/lib/search";
 
 // Copied from node_modules by scripts/build-doc-index.mjs; nothing comes from a CDN.
@@ -29,6 +29,13 @@ function findLabel(f: FindInfo): string {
  * selectable text, page and zoom controls, and find. `#page=N` opens at page N;
  * `#q=...` highlights every match and scrolls to the first one from that page on.
  * PDF.js is loaded only here, on document pages, and only once the page runs.
+ *
+ * Everything comes from PDF.js's `legacy` build, here and in the worker that
+ * scripts/build-doc-index.mjs copies. The default build runs only on the very
+ * latest browsers; the legacy one carries its own replacements for the newest
+ * JavaScript and works from about Chrome 125 and Safari 18 (mid-2024). On
+ * anything older PDF.js cannot start, and the visitor gets the message below
+ * with a link to the original PDF.
  */
 export default function PdfViewer({ src }: { src: string }) {
   const frameRef = useRef<HTMLDivElement>(null);
@@ -82,11 +89,11 @@ export default function PdfViewer({ src }: { src: string }) {
 
     (async () => {
       try {
-        const pdfjs = await import("pdfjs-dist");
+        const pdfjs = await import("pdfjs-dist/legacy/build/pdf.mjs");
         // pdf_viewer.mjs reads the core library from this global.
         (globalThis as { pdfjsLib?: unknown }).pdfjsLib ??= pdfjs;
         pdfjs.GlobalWorkerOptions.workerSrc = `${PDFJS}pdf.worker.min.mjs`;
-        const lib = await import("pdfjs-dist/web/pdf_viewer.mjs");
+        const lib = await import("pdfjs-dist/legacy/web/pdf_viewer.mjs");
         const container = scrollRef.current;
         const pagesDiv = pagesRef.current;
         if (cancelled || !container || !pagesDiv) return;

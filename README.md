@@ -102,6 +102,11 @@ highlights the search term. The design and its rules are in [SPEC.md](SPEC.md).
   gazette PDFs extracts garbled and is left out.
 - **The viewer and site search share one matcher** (`lib/search.ts`), so the
   highlights on a document page are exactly what the results counted.
+- **The viewer needs a browser from about mid-2024 on.** It uses PDF.js's `legacy`
+  build, which PDF.js supports on Chrome and Edge 125+, Safari 18+ and Firefox ESR.
+  On anything older the document page shows a short message and a link to the PDF.
+  The list, the filters and search do not use PDF.js and work on every browser the
+  rest of the site supports.
 
 To add a document:
 

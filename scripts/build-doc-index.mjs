@@ -14,7 +14,9 @@
 //    would only produce false matches; letters outside Latin and Greek go too
 //    (some of those fonts map to CJK code points). The viewer still shows it.
 // 3. Copies the PDF.js worker, character maps, standard fonts and decoders to
-//    public/pdfjs/, so the viewer loads nothing from a CDN.
+//    public/pdfjs/, so the viewer loads nothing from a CDN. The worker is the
+//    `legacy` one, to match the legacy build components/PdfViewer.tsx loads:
+//    it runs on browsers back to about mid-2024, not only the latest.
 //
 // Both outputs are build artefacts and stay out of git. Extraction is skipped
 // when the index is newer than every PDF and this script, so `npm run dev`
@@ -200,7 +202,9 @@ if (await indexIsCurrent()) {
 
 // ---- 3. PDF.js runtime files ---------------------------------------------------
 
-const { version } = JSON.parse(await readFile(path.join(PDFJS, "package.json"), "utf8"));
+const pkg = JSON.parse(await readFile(path.join(PDFJS, "package.json"), "utf8"));
+// The stamp names the build as well, so a copy of the other build is replaced.
+const version = `${pkg.version} legacy`;
 const stamp = path.join(PDFJS_OUT, "VERSION");
 const current = await readFile(stamp, "utf8").catch(() => "");
 if (current.trim() === version) {
@@ -209,7 +213,7 @@ if (current.trim() === version) {
   await rm(PDFJS_OUT, { recursive: true, force: true });
   await mkdir(PDFJS_OUT, { recursive: true });
   await cp(
-    path.join(PDFJS, "build", "pdf.worker.min.mjs"),
+    path.join(PDFJS, "legacy", "build", "pdf.worker.min.mjs"),
     path.join(PDFJS_OUT, "pdf.worker.min.mjs"),
   );
   for (const dir of ["cmaps", "standard_fonts", "wasm", "iccs"]) {

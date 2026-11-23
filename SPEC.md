@@ -90,10 +90,17 @@ total, 1 to 250 pages each.
   writing). Used in two places:
   - at build time, in Node, to extract each page's text into the search index;
   - in the browser, to render the viewer (`PDFViewer`, `PDFFindController`, `PDFLinkService`,
-    `EventBus` from `pdfjs-dist/web/pdf_viewer.mjs`).
+    `EventBus` from `pdfjs-dist/legacy/web/pdf_viewer.mjs`).
 
   Using the same library for both means the text the index matched is the text the
   viewer highlights.
+
+  Both uses take PDF.js's `legacy` build. Its default build runs only on the latest Chrome
+  and Firefox; the legacy build is the one PDF.js supports on Chrome and Edge 125+, Safari
+  18+ and Firefox ESR (browsers from about mid-2024). That is newer than the rest of the
+  site needs (Chrome, Edge and Firefox 111+, Safari 16.4+), so on older browsers the viewer
+  falls back as C6 describes. The list, filters and search do not use PDF.js and work
+  everywhere the site does. Verified in Chromium 148 and Firefox 150; Safari is untested.
 - **Search:** hand-written, no search library. The English text of all 57 PDFs is about 1 MB
   (about 265 KB gzipped), small enough to scan in full on each query.
 - **Tests:** Node's built-in runner (`node --test`), loading `.ts` files through Node 24's
@@ -210,8 +217,9 @@ slug, so the original file is `/docs/<id>.pdf` and its page is `/resources/<id>`
   scrolls to the first match on or after the requested page. Previous/next match controls
   show `match 3 of 41`.
 - **C5.** A find box on the document page edits the query and updates highlights in place.
-- **C6.** Without JavaScript, or if the viewer fails to load the file, the header and both PDF
-  links still work and the viewer area shows a short message with a link to the original.
+- **C6.** Without JavaScript, on a browser too old for PDF.js, or if the viewer fails to load
+  the file, the header and both PDF links still work and the viewer area shows a short
+  message with a link to the original.
 - **C7.** At 375 px width the viewer fits the screen width, controls do not overflow, and the
   page has no horizontal scroll.
 - **C8.** PDF.js code and its worker are requested only on document pages.
