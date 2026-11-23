@@ -7,12 +7,12 @@ below is the order to do them in.
 
 ## Done (branch `document-library`)
 
-- [x] Spec written and approved (`13f49a4`)
-- [x] Library list, category and type filters (`5d358b0`)
-- [x] Full-text search with every occurrence shown (`5d358b0`)
-- [x] Document pages with the PDF viewer (`5d358b0`)
-- [x] Build checks, search index, PDF.js files, sitemap (`5d358b0`)
-- [x] Unit tests for search and for the catalog's filters and counts (`5d358b0`, `aaaf228`)
+- [x] Spec written and approved (`0aa0018`)
+- [x] Library list, category and type filters (`6616e16`)
+- [x] Full-text search with every occurrence shown (`6616e16`)
+- [x] Document pages with the PDF viewer (`6616e16`)
+- [x] Build checks, search index, PDF.js files, sitemap (`6616e16`)
+- [x] Unit tests for search and for the catalog's filters and counts (`6616e16`, `d63a4d6`)
 
 ## Phase 0: Before anything else
 
@@ -28,6 +28,10 @@ below is the order to do them in.
   - Rollback: `git revert` the upgrade commit on `main` and push.
   - Depends on: nothing to start. **The push to `main` needs the owner's explicit sign-off.**
     Scope: Small.
+  - Progress (2026-11-22): upgraded and verified on the branch `next-security-upgrade`
+    (`8e4ac56`, one commit ahead of `main`), and `document-library` is rebased onto it with
+    tests, build and browser checks passing. **Left: the owner's sign-off, then push
+    `next-security-upgrade` to `main` and check the live site.**
 
 ## Phase 1: Finish before release
 

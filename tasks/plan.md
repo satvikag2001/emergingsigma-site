@@ -9,7 +9,8 @@ Written 2026-11-22. Task list: [todo.md](todo.md).
 The document library in SPEC.md is built: `/resources` lists the 57 PDFs with category and
 type filters, full-text search shows every occurrence, and each document has a page with a
 PDF viewer. The work sits on the local branch `document-library` (three commits). `main` is
-untouched and nothing is deployed.
+untouched and nothing is deployed. Since 2026-11-22 the branch sits on top of
+`next-security-upgrade`, the Next.js upgrade from Task 10.
 
 This plan covers what is left between "built on a branch" and "live and verified". Most of
 it is not coding. It is a Next.js security upgrade the owner wants done first, one technical
@@ -20,12 +21,12 @@ belong to the owner, one measurement the spec asks for, and the release itself.
 
 | Spec area | State | Commit |
 |---|---|---|
-| Spec written and approved | Done | `13f49a4` |
-| A. Library list and filters | Done | `5d358b0` |
-| B. Full-text search | Done | `5d358b0` |
-| C. Document pages and viewer | Done, but see Task 1 | `5d358b0` |
-| D. Build checks, index, sitemap | Done | `5d358b0` |
-| Unit tests (46: search 26, catalog 20) | Done | `5d358b0`, `aaaf228` |
+| Spec written and approved | Done | `0aa0018` |
+| A. Library list and filters | Done | `6616e16` |
+| B. Full-text search | Done | `6616e16` |
+| C. Document pages and viewer | Done, but see Task 1 | `6616e16` |
+| D. Build checks, index, sitemap | Done | `6616e16` |
+| Unit tests (46: search 26, catalog 20) | Done | `6616e16`, `d63a4d6` |
 
 Success criteria in SPEC.md:
 
@@ -125,6 +126,13 @@ verify it, and with the owner's sign-off push it to `main` as its own deploy. Th
       (`main` has no test script until the library lands)
 
 **Rollback:** `git revert` the upgrade commit on `main` and push.
+
+**Progress (2026-11-22):** upgraded and verified on the branch `next-security-upgrade`
+(`8e4ac56`): `npm audit` reports no vulnerabilities, the build succeeds on the first
+attempt, and all 17 pages built from `main` are identical before and after in visible text,
+titles, descriptions, canonical URLs, structured data and links. `document-library` is
+rebased onto it and passes its tests, build and browser checks. Left: the owner's sign-off,
+the push to `main`, and the live check.
 
 **Dependencies:** None. Pushing to `main` needs the owner's explicit sign-off.
 
