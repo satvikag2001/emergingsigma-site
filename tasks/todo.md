@@ -76,12 +76,9 @@ below is the order to do them in.
   - Verify: `npm run build`, look at `/resources` at desktop width and 375 px.
   - Depends on: owner input. Scope: XS.
 
-- [ ] **Task 6: Bring DEPLOY.md's "Known gaps" up to date**
-  - Remove the "12 download buttons link to #" item and the two "secret is not set" items
-    (the owner confirmed both secrets are set).
-  - Done when: all three items are gone and `gh secret list` shows both secrets.
-  - Verify: read the section; `gh secret list`.
-  - Depends on: nothing. Scope: XS.
+- [x] **Task 6: Bring DEPLOY.md's "Known gaps" up to date**
+  - Done 2026-11-23. Removed the "12 download buttons link to #" item and the two "secret is
+    not set" items; `gh secret list` shows `WEB3FORMS_ACCESS_KEY` and `CF_BEACON_TOKEN`.
 
 - [ ] **Task 5: Measure accessibility**
   - Lighthouse accessibility on `/resources` and one document page (SPEC.md criterion 10),

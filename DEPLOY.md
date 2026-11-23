@@ -245,11 +245,3 @@ filename, so a changed file gets a new name and browsers fetch it fresh.
 
 - `public/assets/img/hero-product-quality.jpg` is a stand-in copied from
   `equipment-split.jpg`. See `public/assets/img/CREDITS.md`.
-- The 12 download buttons on the resources page link to `#`. Left as-is by
-  decision; when the PDFs exist, put them in `public/docs/` and set each
-  entry's `href` in `lib/resources.ts`.
-- The `WEB3FORMS_ACCESS_KEY` secret is not set, so submissions go nowhere. See
-  step 1. **This is live on the deployed site right now** - every enquiry is
-  being turned away with "This form is not connected yet." Fix this first.
-- The `CF_BEACON_TOKEN` secret is not set, so no traffic is being measured yet.
-  See step 5.

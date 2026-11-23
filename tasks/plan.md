@@ -83,7 +83,7 @@ Built and committed on document-library
         +-- T2  Owner reviews the 57 titles ...... owner
         +-- T3  Owner reviews the new wording .... owner
         +-- T4  Two existing texts ............... owner
-        +-- T6  DEPLOY.md known gaps ............. ready
+        +-- T6  DEPLOY.md known gaps ............. done
         |
         +-- T5  Measure accessibility ............ after T1-T4 (final text and viewer)
         |
@@ -325,8 +325,8 @@ Actions secrets not being set (the owner confirmed on 2026-11-22 that both are).
 three, and check the secrets with `gh secret list` while doing it.
 
 **Acceptance criteria:**
-- [ ] The placeholder-downloads item and the two secrets items are gone from DEPLOY.md.
-- [ ] `gh secret list` shows both secrets, matching what the document now says.
+- [x] The placeholder-downloads item and the two secrets items are gone from DEPLOY.md.
+- [x] `gh secret list` shows both secrets, matching what the document now says.
 
 **Verification:**
 - [ ] Manual check: read the "Known gaps at launch" section
